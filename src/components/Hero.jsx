@@ -1,10 +1,13 @@
 import { motion } from 'framer-motion'
 import AgentPipeline from './AgentPipeline'
+import HeroBackground from './HeroBackground'
 
 export default function Hero() {
   return (
-    <section className="relative min-h-[92vh] flex flex-col justify-center px-6 md:px-12 pt-28 pb-16">
-      <div className="max-w-5xl mx-auto w-full">
+    <section className="relative min-h-[92vh] flex flex-col justify-center px-6 md:px-12 pt-28 pb-16 overflow-hidden">
+      <HeroBackground />
+
+      <div className="relative z-10 max-w-5xl mx-auto w-full">
         <motion.p
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
@@ -60,7 +63,7 @@ export default function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8, delay: 0.5 }}
-        className="max-w-5xl mx-auto w-full mt-20"
+        className="relative z-10 max-w-5xl mx-auto w-full mt-20"
       >
         <p className="font-mono text-xs text-[var(--color-muted)] mb-3">
           // how a typical request moves through my agent stack
