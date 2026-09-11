@@ -34,7 +34,7 @@ export default function Stack() {
           Tech stack
         </motion.h2>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-10 lg:gap-8">
           {stack.map((group, i) => (
             <motion.div
               key={group.group}

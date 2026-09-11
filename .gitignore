@@ -9,3 +9,6 @@ Thumbs.db
 __pycache__
 *.pyc
 .vite
+
+# CV — local only, never commit or ship with the site
+docs/cv/

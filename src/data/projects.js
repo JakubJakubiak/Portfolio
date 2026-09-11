@@ -4,7 +4,7 @@ export const projects = [
     title: 'Industrial Energy Dashboard',
     tag: 'Production',
     year: '2026',
-    stack: ['Python', 'React', 'TypeScript'],
+    stack: ['Python', 'React', 'MQTT', 'Raspberry Pi'],
     description:
       'Live operations panel for energy storage and industrial sites. Overview rings went from ~19 s to ~0.26 s; empty charts no longer freeze for 35 s.',
     metric: 'Overview charts 71× faster',
@@ -107,6 +107,15 @@ export const stack = [
       { name: 'REST APIs', icon: 'rest' },
       { name: 'Firebase', icon: 'firebase' },
       { name: 'Supabase', icon: 'supabase' },
+    ],
+  },
+  {
+    group: 'Edge / IoT',
+    items: [
+      { name: 'Raspberry Pi', icon: 'raspberrypi' },
+      { name: 'WireGuard', icon: 'wireguard' },
+      { name: 'MQTT', icon: 'mqtt' },
+      { name: 'Time-series', icon: 'timeseries' },
     ],
   },
   {

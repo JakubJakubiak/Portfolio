@@ -13,6 +13,9 @@ import {
   siFirebase,
   siSupabase,
   siLangchain,
+  siMqtt,
+  siRaspberrypi,
+  siWireguard,
 } from 'simple-icons'
 
 const brand = {
@@ -31,6 +34,9 @@ const brand = {
   firebase: siFirebase,
   supabase: siSupabase,
   langchain: siLangchain,
+  mqtt: siMqtt,
+  raspberrypi: siRaspberrypi,
+  wireguard: siWireguard,
 }
 
 /** Abstract glyphs for skills without a clean brand mark */
@@ -40,6 +46,7 @@ const abstract = {
   llm: 'M12 3a4.5 4.5 0 0 0-4.5 4.5V9H6a3 3 0 0 0-3 3v6a3 3 0 0 0 3 3h12a3 3 0 0 0 3-3v-6a3 3 0 0 0-3-3h-1.5V7.5A4.5 4.5 0 0 0 12 3zm-2.5 10.5a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm5 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z',
   prompt: 'M4 5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H9l-4 4v-4H6a2 2 0 0 1-2-2V5zm3 3v2h8V8H7zm0 4v2h5v-2H7z',
   agent: 'M7 8a5 5 0 0 1 10 0v1h1a3 3 0 0 1 3 3v6a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3v-6a3 3 0 0 1 3-3h1V8zm2.5 7a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm5 0a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z',
+  timeseries: 'M3 18h18v2H3zm2-3 3.2-4.2 2.6 2.1L15 7.5 21 13v2.2l-6-5.4-4.2 5.6-2.5-2L5 16.2z',
 }
 
 export default function TechIcon({ name, className = '' }) {
