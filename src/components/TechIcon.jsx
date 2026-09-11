@@ -14,7 +14,6 @@ import {
   siSupabase,
   siLangchain,
   siMqtt,
-  siRaspberrypi,
   siWireguard,
 } from 'simple-icons'
 
@@ -35,7 +34,6 @@ const brand = {
   supabase: siSupabase,
   langchain: siLangchain,
   mqtt: siMqtt,
-  raspberrypi: siRaspberrypi,
   wireguard: siWireguard,
 }
 

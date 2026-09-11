@@ -226,7 +226,7 @@ export default function EmsCase() {
         >
           Live operations panel for energy storage and industrial sites. Overview
           rings showed the right totals — they just took ~19 s to appear. MQTT and
-          time-series on production; same panel as a Raspberry Pi kiosk.
+          time-series on production.
         </motion.p>
 
         <RaceStage reduce={reduce} />
