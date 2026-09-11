@@ -21,20 +21,33 @@ function ProjectCard({ project: p, index: i }) {
     v.currentTime = 0
   }
 
+  const cardClass =
+    'group relative flex flex-col justify-between overflow-hidden p-6 rounded-2xl bg-[var(--color-surface)] border border-[var(--color-line)] hover:border-[var(--color-teal)]/60 transition-colors min-h-[340px]'
+
+  const motionProps = {
+    initial: { opacity: 0, y: 16 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: { once: true, margin: '-60px' },
+    transition: { duration: 0.4, delay: (i % 2) * 0.08 },
+    onMouseEnter: playPreview,
+    onMouseLeave: pausePreview,
+    onFocus: playPreview,
+    onBlur: pausePreview,
+  }
+
+  const Card = p.link ? motion.a : motion.article
+  const isHash = p.link?.startsWith('#')
+
   return (
-    <motion.a
-      href={p.link}
-      target="_blank"
-      rel="noreferrer"
-      initial={{ opacity: 0, y: 16 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-60px' }}
-      transition={{ duration: 0.4, delay: (i % 2) * 0.08 }}
-      onMouseEnter={playPreview}
-      onMouseLeave={pausePreview}
-      onFocus={playPreview}
-      onBlur={pausePreview}
-      className="group relative flex flex-col justify-between overflow-hidden p-6 rounded-2xl bg-[var(--color-surface)] border border-[var(--color-line)] hover:border-[var(--color-teal)]/60 transition-colors cursor-pointer min-h-[340px]"
+    <Card
+      {...motionProps}
+      {...(p.link
+        ? {
+            href: p.link,
+            ...(isHash ? {} : { target: '_blank', rel: 'noreferrer' }),
+            className: `${cardClass} cursor-pointer`,
+          }
+        : { className: cardClass })}
     >
       <div className="relative z-10">
         <div className="flex items-center justify-between mb-4">
@@ -47,10 +60,12 @@ function ProjectCard({ project: p, index: i }) {
           >
             {p.tag}
           </span>
-          <ArrowUpRight
-            size={18}
-            className="text-[var(--color-muted)] group-hover:text-[var(--color-text)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"
-          />
+          {p.link ? (
+            <ArrowUpRight
+              size={18}
+              className="text-[var(--color-muted)] group-hover:text-[var(--color-text)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"
+            />
+          ) : null}
         </div>
         <h3 className="font-[var(--font-display)] text-xl font-semibold mb-2">
           {p.title}
@@ -106,7 +121,7 @@ function ProjectCard({ project: p, index: i }) {
           )}
         </div>
       )}
-    </motion.a>
+    </Card>
   )
 }
 

@@ -1,5 +1,17 @@
 export const projects = [
   {
+    id: 'energy-dashboard',
+    title: 'Industrial Energy Dashboard',
+    tag: 'Production',
+    year: '2026',
+    stack: ['Python', 'React', 'TypeScript'],
+    description:
+      'Live operations panel for energy storage and industrial sites. Overview rings went from ~19 s to ~0.26 s; empty charts no longer freeze for 35 s.',
+    metric: 'Overview charts 71× faster',
+    link: '#ems',
+    accent: 'teal',
+  },
+  {
     id: 'mymultimind',
     title: 'MyMultimind: Chat AI Bot',
     tag: 'AI Product',

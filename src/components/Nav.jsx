@@ -27,6 +27,7 @@ export default function Nav() {
           Inu<span className="text-[var(--color-amber)]">.</span>dev
         </a>
         <div className="hidden sm:flex items-center gap-8 font-mono text-xs text-[var(--color-muted)]">
+          <a href="#ems" className="hover:text-[var(--color-text)] transition-colors cursor-pointer">case</a>
           <a href="#projects" className="hover:text-[var(--color-text)] transition-colors cursor-pointer">projects</a>
           <a href="#stack" className="hover:text-[var(--color-text)] transition-colors cursor-pointer">stack</a>
           <a href="#contact" className="hover:text-[var(--color-text)] transition-colors cursor-pointer">contact</a>

@@ -1,6 +1,8 @@
 # Portfolio
 
-Personal portfolio of **Jakub Jakubiak** — Full Stack Engineer building LLM integrations, agentic tooling, and interactive web experiences.
+Personal portfolio of **Jakub Jakubiak** — Full Stack Engineer building industrial energy dashboards, LLM integrations, and agentic tooling.
+
+Public-safe case notes (no IPs, clients, or wiring): [`docs/ems/`](docs/ems/).
 
 ## Stack
 

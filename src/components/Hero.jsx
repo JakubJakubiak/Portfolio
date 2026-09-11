@@ -34,8 +34,8 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="mt-6 max-w-xl text-lg text-[var(--color-muted)]"
         >
-          Full Stack Engineer at Ennovation Technology — building LLM integrations,
-          agentic tooling, and interactive web experiences. Warsaw, Poland.
+          Full Stack Engineer at Ennovation Technology — industrial energy
+          dashboards, LLM integrations, and agentic tooling. Warsaw, Poland.
         </motion.p>
 
         <motion.div
@@ -45,16 +45,16 @@ export default function Hero() {
           className="mt-8 flex flex-wrap items-center gap-4"
         >
           <a
-            href="#projects"
+            href="#ems"
             className="px-6 py-3 bg-[var(--color-amber)] text-[#0a0b0e] font-medium rounded-full hover:brightness-110 transition-all cursor-pointer"
           >
-            View projects
+            The 71× case
           </a>
           <a
-            href="#contact"
+            href="#projects"
             className="px-6 py-3 border border-[var(--color-line)] rounded-full hover:border-[var(--color-teal)] hover:text-[var(--color-teal)] transition-colors cursor-pointer"
           >
-            Contact
+            View projects
           </a>
         </motion.div>
       </div>

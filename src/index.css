@@ -48,3 +48,39 @@ body {
   outline: 2px solid var(--color-amber);
   outline-offset: 3px;
 }
+
+@keyframes ems-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.ems-skeleton {
+  background-image: linear-gradient(
+    90deg,
+    var(--color-surface-2) 0%,
+    #3d4454 45%,
+    var(--color-surface-2) 90%
+  );
+  background-size: 220% 100%;
+  animation: ems-shimmer 1.15s ease-in-out infinite;
+}
+
+@keyframes ems-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+.ems-cursor {
+  display: inline-block;
+  width: 0.55ch;
+  height: 1.05em;
+  margin-left: 2px;
+  background: var(--color-teal);
+  vertical-align: -0.15em;
+  animation: ems-blink 1.05s step-end infinite;
+}

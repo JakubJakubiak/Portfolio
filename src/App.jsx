@@ -1,5 +1,6 @@
 import Nav from './components/Nav'
 import Hero from './components/Hero'
+import EmsCase from './components/EmsCase'
 import Projects from './components/Projects'
 import Stack from './components/Stack'
 import Contact from './components/Contact'
@@ -10,6 +11,7 @@ export default function App() {
       <Nav />
       <main>
         <Hero />
+        <EmsCase />
         <Projects />
         <Stack />
         <Contact />
