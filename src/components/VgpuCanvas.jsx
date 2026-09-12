@@ -1,5 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
 
+const DEFAULT_DPR = [1, 1.25]
+const MIN_FRAME_MS = 1000 / 60
+
 function waitForCanvasSize(canvas) {
   return new Promise((resolve) => {
     if (canvas.clientWidth > 0 && canvas.clientHeight > 0) {
@@ -30,7 +33,7 @@ export default function VgpuCanvas({
   blend,
   clearColor = [0, 0, 0, 1],
   alphaMode = 'opaque',
-  dpr = [1, 2],
+  dpr = DEFAULT_DPR,
   animate = true,
   ariaHidden = true,
   onReady,
@@ -55,7 +58,17 @@ export default function VgpuCanvas({
     }
 
     let disposed = false
+    let visible = true
+    let lastDraw = 0
     let stopLoop = () => {}
+
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        visible = Boolean(entry?.isIntersecting && entry.intersectionRatio > 0.02)
+      },
+      { threshold: [0, 0.02, 0.1] },
+    )
+    io.observe(canvas)
 
     ;(async () => {
       try {
@@ -82,6 +95,11 @@ export default function VgpuCanvas({
         const clk = clock(gpu)
 
         const loop = frameLoop(gpu, (frame) => {
+          if (disposed || document.hidden || !visible) return
+          const now = performance.now()
+          if (now - lastDraw < MIN_FRAME_MS) return
+          lastDraw = now
+
           const [w, h] = surf.size
           fx.set({
             resolution: [w, h],
@@ -110,6 +128,7 @@ export default function VgpuCanvas({
 
     return () => {
       disposed = true
+      io.disconnect()
       stopLoop()
       setReady(false)
     }

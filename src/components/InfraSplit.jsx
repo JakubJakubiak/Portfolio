@@ -138,7 +138,6 @@ export default function InfraSplit() {
               blend="premultiplied"
               clearColor={[0, 0, 0, 0]}
               alphaMode="premultiplied"
-              dpr={[1, 1.5]}
               onFail={() => setGpuFail(true)}
             />
           )}

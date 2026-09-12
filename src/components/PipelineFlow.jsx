@@ -14,7 +14,6 @@ export default function PipelineFlow() {
       blend="premultiplied"
       clearColor={[0, 0, 0, 0]}
       alphaMode="premultiplied"
-      dpr={[1, 2]}
       onFail={() => setFailed(true)}
     />
   )
