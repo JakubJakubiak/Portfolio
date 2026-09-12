@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { isPageScrolling } from '../hooks/isPageScrolling'
 
 const DEFAULT_DPR = [1, 1.25]
 const MIN_FRAME_MS = 1000 / 60
@@ -95,7 +96,7 @@ export default function VgpuCanvas({
         const clk = clock(gpu)
 
         const loop = frameLoop(gpu, (frame) => {
-          if (disposed || document.hidden || !visible) return
+          if (disposed || document.hidden || !visible || isPageScrolling()) return
           const now = performance.now()
           if (now - lastDraw < MIN_FRAME_MS) return
           lastDraw = now

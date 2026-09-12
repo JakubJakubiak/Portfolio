@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { isPageScrolling } from './isPageScrolling'
 
 const DURATION = 4.2
 
@@ -22,10 +23,14 @@ export function usePipelineSignal(enabled = true) {
     const start = performance.now()
 
     const tick = (now) => {
-      const linear = ((now - start) / 1000 / DURATION) % 1
-      setProgress(pingPong(linear))
-      setForward(linear < 0.5)
       raf = requestAnimationFrame(tick)
+      if (document.hidden || isPageScrolling()) return
+
+      const linear = ((now - start) / 1000 / DURATION) % 1
+      const next = pingPong(linear)
+      const going = linear < 0.5
+      setProgress((prev) => (Math.abs(prev - next) > 0.004 ? next : prev))
+      setForward((prev) => (prev === going ? prev : going))
     }
 
     raf = requestAnimationFrame(tick)
