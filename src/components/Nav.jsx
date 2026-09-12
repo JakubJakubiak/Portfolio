@@ -24,7 +24,7 @@ export default function Nav() {
       </div>
       <nav className="flex items-center justify-between px-6 md:px-12 py-5 backdrop-blur-sm">
         <a href="/" className="flex items-center gap-2 font-[var(--font-display)] font-semibold text-lg tracking-tight">
-          <img src="/logo-64.png" alt="" width="28" height="28" className="size-7 shrink-0" />
+          <img src="/logo-64.webp" alt="" width="28" height="28" className="size-7 shrink-0" />
           Inu<span className="text-[var(--color-amber)]">.</span>dev
         </a>
         <div className="hidden sm:flex items-center gap-8 font-mono text-xs text-[var(--color-muted)]">
