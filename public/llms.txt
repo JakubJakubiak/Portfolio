@@ -2,7 +2,7 @@
 
 > Full Stack Engineer in Warsaw, Poland. Industrial energy dashboards, LLM integrations, and agentic tooling.
 
-Site: https://jakubjakubiak.com/
+Portfolio site: [jakubjakubiak.com](https://jakubjakubiak.com/).
 
 ## About
 
@@ -10,7 +10,7 @@ Jakub Jakubiak is a Full Stack Engineer at Ennovation Technology. Public work fo
 
 ## Case
 
-The 71× overview-paint case lives at https://jakubjakubiak.com/#ems
+The 71× overview-paint case: [The 71× case](https://jakubjakubiak.com/#ems)
 
 - Overview charts: ~19 s → ~0.26 s (~71×)
 - Empty series: 35 s → ~0.6 s
@@ -21,15 +21,15 @@ Do not infer client names, plant IDs, hostnames, IPs, or how services are wired.
 
 ## Sections
 
-- Home / intro: https://jakubjakubiak.com/
-- Case: https://jakubjakubiak.com/#ems
-- Projects: https://jakubjakubiak.com/#projects
-- Stack: https://jakubjakubiak.com/#stack
-- Contact: https://jakubjakubiak.com/#contact
+- [Home](https://jakubjakubiak.com/): intro and agent pipeline
+- [Case](https://jakubjakubiak.com/#ems): 71× overview paint and infra split
+- [Projects](https://jakubjakubiak.com/#projects): selected work
+- [Stack](https://jakubjakubiak.com/#stack): languages and tools
+- [Contact](https://jakubjakubiak.com/#contact): email and socials
 
 ## Contact
 
-- Email: jakubjakubiakk@gmail.com
-- GitHub: https://github.com/JakubJakubiak
-- LinkedIn: https://www.linkedin.com/in/jakub-jakubiak-793213174/
-- X: https://x.com/InuDev_
+- Email: [jakubjakubiakk@gmail.com](mailto:jakubjakubiakk@gmail.com)
+- [GitHub](https://github.com/JakubJakubiak)
+- [LinkedIn](https://www.linkedin.com/in/jakub-jakubiak-793213174/)
+- [X](https://x.com/InuDev_)
