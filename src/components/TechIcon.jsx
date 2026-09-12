@@ -1,7 +1,6 @@
 import {
   siTypescript,
   siJavascript,
-  siPython,
   siDart,
   siDotnet,
   siReact,
@@ -15,12 +14,13 @@ import {
   siLangchain,
   siMqtt,
   siWireguard,
+  siDocker,
+  siOvh,
 } from 'simple-icons'
 
 const brand = {
   typescript: siTypescript,
   javascript: siJavascript,
-  python: siPython,
   dart: siDart,
   csharp: siDotnet,
   react: siReact,
@@ -35,6 +35,8 @@ const brand = {
   langchain: siLangchain,
   mqtt: siMqtt,
   wireguard: siWireguard,
+  docker: siDocker,
+  ovh: siOvh,
 }
 
 /** Abstract glyphs for skills without a clean brand mark */

@@ -10,7 +10,7 @@ Cloud panel for day-to-day use. The same product also runs as an offline kiosk o
 
 ## What I worked on
 
-Full stack on a live system: Python API, React/TypeScript UI, time-series history, live telemetry, and edge kiosk. The story worth putting on the site is not the stack list — it is that **overview went from unusable to instant**. That write-up is [02-performance.md](02-performance.md).
+Full stack on a live system: API, React/TypeScript UI, time-series history, and live telemetry. The story worth putting on the site is not the stack list — it is that **overview went from unusable to instant**. That write-up is [02-performance.md](02-performance.md).
 
 ## What this page is not
 

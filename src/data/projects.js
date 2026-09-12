@@ -4,7 +4,7 @@ export const projects = [
     title: 'Industrial Energy Dashboard',
     tag: 'Production',
     year: '2026',
-    stack: ['Python', 'React', 'MQTT', 'TypeScript'],
+    stack: ['Node.js', 'React', 'MQTT', 'TypeScript'],
     description:
       'Live operations panel for energy storage and industrial sites. Overview ~19 s → ~0.26 s. Time-series split off the API onto its own machine — vendor cloud writes at zero.',
     metric: 'Overview charts 71× faster',
@@ -84,7 +84,6 @@ export const stack = [
     items: [
       { name: 'TypeScript', icon: 'typescript' },
       { name: 'JavaScript', icon: 'javascript' },
-      { name: 'Python', icon: 'python' },
       { name: 'Dart', icon: 'dart' },
       { name: 'C#', icon: 'csharp' },
     ],
@@ -104,9 +103,11 @@ export const stack = [
     items: [
       { name: 'Node.js', icon: 'nodejs' },
       { name: 'Express', icon: 'express' },
+      { name: 'Docker', icon: 'docker' },
       { name: 'REST APIs', icon: 'rest' },
       { name: 'Firebase', icon: 'firebase' },
       { name: 'Supabase', icon: 'supabase' },
+      { name: 'OVH', icon: 'ovh' },
     ],
   },
   {
