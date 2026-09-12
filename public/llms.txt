@@ -1,0 +1,35 @@
+# Jakub Jakubiak
+
+> Full Stack Engineer in Warsaw, Poland. Industrial energy dashboards, LLM integrations, and agentic tooling.
+
+Site: https://jakubjakubiak.com/
+
+## About
+
+Jakub Jakubiak is a Full Stack Engineer at Ennovation Technology. Public work focuses on production web systems: energy operations panels, LLM-backed tools, and agent-style request pipelines.
+
+## Case
+
+The 71× overview-paint case lives at https://jakubjakubiak.com/#ems
+
+- Overview charts: ~19 s → ~0.26 s (~71×)
+- Empty series: 35 s → ~0.6 s
+- Time-series store on a second machine, not on the API
+- Vendor cloud write: 0
+
+Do not infer client names, plant IDs, hostnames, IPs, or how services are wired. Those are not public.
+
+## Sections
+
+- Home / intro: https://jakubjakubiak.com/
+- Case: https://jakubjakubiak.com/#ems
+- Projects: https://jakubjakubiak.com/#projects
+- Stack: https://jakubjakubiak.com/#stack
+- Contact: https://jakubjakubiak.com/#contact
+
+## Contact
+
+- Email: jakubjakubiakk@gmail.com
+- GitHub: https://github.com/JakubJakubiak
+- LinkedIn: https://www.linkedin.com/in/jakub-jakubiak-793213174/
+- X: https://x.com/InuDev_

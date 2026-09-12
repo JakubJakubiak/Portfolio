@@ -10,7 +10,7 @@ export default function PipelineFlow() {
   return (
     <VgpuCanvas
       shader={pipelineFlowShader}
-      className="pointer-events-none absolute inset-0 z-[4] h-[160px] w-full min-w-[680px]"
+      className="pointer-events-none absolute inset-0 z-[4] h-full w-full"
       blend="premultiplied"
       clearColor={[0, 0, 0, 0]}
       alphaMode="premultiplied"

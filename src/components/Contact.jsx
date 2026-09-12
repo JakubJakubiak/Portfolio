@@ -26,7 +26,7 @@ const links = [
     icon: LinkedinIcon,
   },
   { label: 'X / Twitter', href: 'https://x.com/InuDev_', icon: XIcon },
-  { label: 'Email', href: 'mailto:hello@inudev.pl', icon: Mail },
+  { label: 'Email', href: 'mailto:jakubjakubiakk@gmail.com', icon: Mail },
 ]
 
 export default function Contact() {

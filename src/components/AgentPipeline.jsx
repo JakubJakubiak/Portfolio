@@ -1,13 +1,31 @@
+import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { pipeline } from '../data/projects'
 import { usePipelineSignal } from '../hooks/usePipelineSignal'
 import PipelineFlow from './PipelineFlow'
 
-function PipelineNode({ step, cx, index, accent, activation }) {
+function useCompact() {
+  const [compact, setCompact] = useState(
+    () => typeof window !== 'undefined' && window.matchMedia('(max-width: 639px)').matches,
+  )
+
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 639px)')
+    const sync = () => setCompact(mq.matches)
+    sync()
+    mq.addEventListener('change', sync)
+    return () => mq.removeEventListener('change', sync)
+  }, [])
+
+  return compact
+}
+
+function PipelineNode({ step, cx, index, accent, activation, compact }) {
   const isAmber = index % 2 === 0
   const glow = 8 + activation * 18
   const strokeW = 1.5 + activation * 1.4
-  const r = 22 + activation * 2.5
+  const r = (compact ? 18 : 22) + activation * 2.5
+  const cy = compact ? 52 : 80
 
   return (
     <motion.g
@@ -15,11 +33,11 @@ function PipelineNode({ step, cx, index, accent, activation }) {
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true }}
       transition={{ delay: index * 0.1, duration: 0.35 }}
-      style={{ transformOrigin: `${cx}px 80px` }}
+      style={{ transformOrigin: `${cx}px ${cy}px` }}
     >
       <circle
         cx={cx}
-        cy={80}
+        cy={cy}
         r={r}
         fill="var(--color-surface)"
         stroke={accent}
@@ -32,43 +50,46 @@ function PipelineNode({ step, cx, index, accent, activation }) {
       />
       <text
         x={cx}
-        y={85}
+        y={cy + 4}
         textAnchor="middle"
         fontFamily="var(--font-mono)"
-        fontSize="12"
+        fontSize={compact ? 11 : 12}
         fill="var(--color-text)"
       >
         {step.id}
       </text>
       <text
         x={cx}
-        y={126}
+        y={compact ? 88 : 126}
         textAnchor="middle"
         fontFamily="var(--font-display)"
-        fontSize="14"
+        fontSize={compact ? 12 : 14}
         fontWeight="600"
         fill="var(--color-text)"
       >
         {step.label}
       </text>
-      <text
-        x={cx}
-        y={144}
-        textAnchor="middle"
-        fontFamily="var(--font-body)"
-        fontSize="11"
-        fill={activation > 0.3 ? 'var(--color-text)' : 'var(--color-muted)'}
-      >
-        {step.detail}
-      </text>
+      {!compact && (
+        <text
+          x={cx}
+          y={144}
+          textAnchor="middle"
+          fontFamily="var(--font-body)"
+          fontSize="11"
+          fill={activation > 0.3 ? 'var(--color-text)' : 'var(--color-muted)'}
+        >
+          {step.detail}
+        </text>
+      )}
     </motion.g>
   )
 }
 
-function NeonTrack({ padding, innerWidth, barX, barW, progress, forward }) {
+function NeonTrack({ padding, innerWidth, barX, barW, progress, forward, compact }) {
   const trailForwardW = Math.max(0, barX + barW - padding)
   const trailBackwardX = barX
   const trailBackwardW = Math.max(0, padding + innerWidth - barX)
+  const y = compact ? 44 : 72
 
   return (
     <>
@@ -104,10 +125,9 @@ function NeonTrack({ padding, innerWidth, barX, barW, progress, forward }) {
         </filter>
       </defs>
 
-      {/* Neon pipe — full visible track */}
       <rect
         x={padding}
-        y={72}
+        y={y}
         width={innerWidth}
         height={16}
         rx={8}
@@ -117,11 +137,9 @@ function NeonTrack({ padding, innerWidth, barX, barW, progress, forward }) {
         filter="url(#pipeline-line-glow)"
         opacity={0.95}
       />
-
-      {/* Inner channel groove */}
       <rect
         x={padding + 3}
-        y={75}
+        y={y + 3}
         width={innerWidth - 6}
         height={10}
         rx={5}
@@ -130,12 +148,10 @@ function NeonTrack({ padding, innerWidth, barX, barW, progress, forward }) {
         strokeWidth="1"
         opacity={0.6}
       />
-
-      {/* Trail — lit wake behind the bar */}
       {forward && trailForwardW > 2 && (
         <rect
           x={padding}
-          y={75}
+          y={y + 3}
           width={trailForwardW}
           height={10}
           rx={5}
@@ -146,7 +162,7 @@ function NeonTrack({ padding, innerWidth, barX, barW, progress, forward }) {
       {!forward && trailBackwardW > 2 && (
         <rect
           x={trailBackwardX}
-          y={75}
+          y={y + 3}
           width={trailBackwardW}
           height={10}
           rx={5}
@@ -154,11 +170,9 @@ function NeonTrack({ padding, innerWidth, barX, barW, progress, forward }) {
           opacity={0.85}
         />
       )}
-
-      {/* Traveling neon bar — fade slightly at turnaround ends */}
       <rect
         x={barX}
-        y={74}
+        y={y + 2}
         width={barW}
         height={12}
         rx={6}
@@ -171,25 +185,26 @@ function NeonTrack({ padding, innerWidth, barX, barW, progress, forward }) {
 }
 
 export default function AgentPipeline() {
+  const compact = useCompact()
   const { progress, forward, nodeActivation } = usePipelineSignal(true)
 
   const nodeCount = pipeline.length
-  const padding = 32
-  const innerWidth = 900
+  const padding = compact ? 36 : 72
+  const innerWidth = compact ? 488 : 852
+  const height = compact ? 108 : 160
   const width = innerWidth + padding * 2
   const gap = innerWidth / (nodeCount - 1)
-  const barW = 80
+  const barW = compact ? 44 : 80
   const barX = padding + progress * (innerWidth - barW)
 
   return (
-    <div className="relative w-full overflow-x-auto">
-      <div className="relative h-[160px] min-w-[680px] w-full">
-        <PipelineFlow />
+    <div className="relative w-full overflow-hidden">
+      <div className="relative w-full" style={{ aspectRatio: `${width} / ${height}` }}>
+        {!compact && <PipelineFlow />}
 
-        {/* Track + traveling bar — always animated via SVG */}
         <svg
-          viewBox={`0 0 ${width} 160`}
-          className="pointer-events-none absolute inset-0 z-[6] h-[160px] w-full"
+          viewBox={`0 0 ${width} ${height}`}
+          className="pointer-events-none absolute inset-0 z-[6] h-full w-full"
           preserveAspectRatio="xMidYMid meet"
           aria-hidden
         >
@@ -200,13 +215,13 @@ export default function AgentPipeline() {
             barW={barW}
             progress={progress}
             forward={forward}
+            compact={compact}
           />
         </svg>
 
-        {/* Nodes + labels */}
         <svg
-          viewBox={`0 0 ${width} 160`}
-          className="relative z-10 h-[160px] w-full"
+          viewBox={`0 0 ${width} ${height}`}
+          className="absolute inset-0 z-10 h-full w-full"
           preserveAspectRatio="xMidYMid meet"
           role="img"
           aria-label="Agent pipeline diagram: Input, Retrieve, Reason, Act, Output"
@@ -224,6 +239,7 @@ export default function AgentPipeline() {
                 index={i}
                 accent={accent}
                 activation={activation}
+                compact={compact}
               />
             )
           })}
