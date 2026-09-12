@@ -14,6 +14,10 @@ const LOG_LINES = [
   { at: 3180, kind: 'warn', text: 'before   query    timeout  ~3 s' },
   { at: 3200, kind: 'warn', text: 'before   paint    18.52 s' },
   { at: 3480, kind: 'hi', text: 'speedup  71.2×    −18.26 s' },
+  { at: 3900, kind: 'cmd', text: '$ infra split --time-series' },
+  { at: 4100, kind: 'ok', text: 'store    own machine  (not on the API)' },
+  { at: 4100, kind: 'ok', text: 'api      lighter     CPU/RAM back' },
+  { at: 4300, kind: 'hi', text: 'vendor   cloud write  0' },
 ]
 
 function formatClock(s) {
@@ -88,7 +92,7 @@ function ServerLog({ elapsed, reduce }) {
 
   return (
     <div
-      className="font-mono text-[13px] md:text-sm leading-7 min-h-[13.5rem]"
+      className="font-mono text-[13px] md:text-sm leading-7 min-h-[18rem]"
       aria-label="Timing probe output"
     >
       <p className="text-[10px] uppercase tracking-[0.2em] text-[var(--color-muted)] mb-3">
@@ -134,7 +138,7 @@ function RaceStage({ reduce }) {
     active,
     reduced: reduce,
     runId,
-    stopAfterMs: 4000,
+    stopAfterMs: 4600,
   })
 
   return (
@@ -225,8 +229,8 @@ export default function EmsCase() {
           className="max-w-2xl text-[var(--color-muted)] text-lg leading-relaxed mb-14"
         >
           Live operations panel for energy storage and industrial sites. Overview
-          rings showed the right totals — they just took ~19 s to appear. MQTT and
-          time-series on production.
+          rings showed the right totals — they just took ~19 s to appear. Time-series
+          on its own machine, not on the API — faster API box, no vendor-cloud lock-in.
         </motion.p>
 
         <RaceStage reduce={reduce} />
