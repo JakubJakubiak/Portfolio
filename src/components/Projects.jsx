@@ -1,11 +1,28 @@
-import { useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import { ArrowUpRight } from 'lucide-react'
 import { projects } from '../data/projects'
 
 function ProjectCard({ project: p, index: i }) {
+  const cardRef = useRef(null)
   const videoRef = useRef(null)
+  const [mediaReady, setMediaReady] = useState(!p.video)
   const hasMedia = Boolean(p.video || p.image)
+
+  useEffect(() => {
+    if (!p.video) return undefined
+    const node = cardRef.current
+    if (!node) return undefined
+
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) setMediaReady(true)
+      },
+      { rootMargin: '120px' },
+    )
+    io.observe(node)
+    return () => io.disconnect()
+  }, [p.video])
 
   const playPreview = () => {
     const v = videoRef.current
@@ -40,6 +57,7 @@ function ProjectCard({ project: p, index: i }) {
 
   return (
     <Card
+      ref={cardRef}
       {...motionProps}
       {...(p.link
         ? {
@@ -102,15 +120,17 @@ function ProjectCard({ project: p, index: i }) {
         >
           <div className="absolute inset-x-0 top-0 h-12 bg-gradient-to-b from-[var(--color-surface)] to-transparent z-[1]" />
           {p.video ? (
-            <video
-              ref={videoRef}
-              className="h-full w-full object-contain object-bottom"
-              src={p.video}
-              muted
-              loop
-              playsInline
-              preload="auto"
-            />
+            mediaReady ? (
+              <video
+                ref={videoRef}
+                className="h-full w-full object-contain object-bottom"
+                src={p.video}
+                muted
+                loop
+                playsInline
+                preload="none"
+              />
+            ) : null
           ) : (
             <img
               src={p.image}
