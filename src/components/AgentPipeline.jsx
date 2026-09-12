@@ -20,12 +20,10 @@ function useCompact() {
   return compact
 }
 
-function PipelineNode({ step, cx, index, accent, activation, compact }) {
+function PipelineNode({ step, cx, index, accent, compact }) {
   const isAmber = index % 2 === 0
-  const glow = 8 + activation * 18
-  const strokeW = 1.5 + activation * 1.4
-  const r = (compact ? 18 : 22) + activation * 2.5
   const cy = compact ? 52 : 80
+  const r = compact ? 18 : 22
 
   return (
     <motion.g
@@ -41,11 +39,11 @@ function PipelineNode({ step, cx, index, accent, activation, compact }) {
         r={r}
         fill="var(--color-surface)"
         stroke={accent}
-        strokeWidth={strokeW}
+        strokeWidth="1.6"
         style={{
           filter: isAmber
-            ? `drop-shadow(0 0 ${glow}px var(--color-amber))`
-            : `drop-shadow(0 0 ${glow}px var(--color-teal))`,
+            ? 'drop-shadow(0 0 10px var(--color-amber))'
+            : 'drop-shadow(0 0 10px var(--color-teal))',
         }}
       />
       <text
@@ -76,7 +74,7 @@ function PipelineNode({ step, cx, index, accent, activation, compact }) {
           textAnchor="middle"
           fontFamily="var(--font-body)"
           fontSize="11"
-          fill={activation > 0.3 ? 'var(--color-text)' : 'var(--color-muted)'}
+          fill="var(--color-muted)"
         >
           {step.detail}
         </text>
@@ -85,7 +83,10 @@ function PipelineNode({ step, cx, index, accent, activation, compact }) {
   )
 }
 
-function NeonTrack({ padding, innerWidth, barX, barW, progress, forward, compact }) {
+function NeonTrack({ padding, innerWidth, compact }) {
+  const { progress, forward } = usePipelineSignal(true)
+  const barW = compact ? 44 : 80
+  const barX = padding + progress * (innerWidth - barW)
   const trailForwardW = Math.max(0, barX + barW - padding)
   const trailBackwardX = barX
   const trailBackwardW = Math.max(0, padding + innerWidth - barX)
@@ -186,16 +187,12 @@ function NeonTrack({ padding, innerWidth, barX, barW, progress, forward, compact
 
 export default function AgentPipeline() {
   const compact = useCompact()
-  const { progress, forward, nodeActivation } = usePipelineSignal(true)
-
   const nodeCount = pipeline.length
   const padding = compact ? 36 : 72
   const innerWidth = compact ? 488 : 852
   const height = compact ? 108 : 160
   const width = innerWidth + padding * 2
   const gap = innerWidth / (nodeCount - 1)
-  const barW = compact ? 44 : 80
-  const barX = padding + progress * (innerWidth - barW)
 
   return (
     <div className="relative w-full overflow-hidden">
@@ -208,15 +205,7 @@ export default function AgentPipeline() {
           preserveAspectRatio="xMidYMid meet"
           aria-hidden
         >
-          <NeonTrack
-            padding={padding}
-            innerWidth={innerWidth}
-            barX={barX}
-            barW={barW}
-            progress={progress}
-            forward={forward}
-            compact={compact}
-          />
+          <NeonTrack padding={padding} innerWidth={innerWidth} compact={compact} />
         </svg>
 
         <svg
@@ -226,23 +215,16 @@ export default function AgentPipeline() {
           role="img"
           aria-label="Agent pipeline diagram: Input, Retrieve, Reason, Act, Output"
         >
-          {pipeline.map((step, i) => {
-            const cx = padding + i * gap
-            const accent = i % 2 === 0 ? 'var(--color-amber)' : 'var(--color-teal)'
-            const activation = nodeActivation(i, nodeCount)
-
-            return (
-              <PipelineNode
-                key={step.id}
-                step={step}
-                cx={cx}
-                index={i}
-                accent={accent}
-                activation={activation}
-                compact={compact}
-              />
-            )
-          })}
+          {pipeline.map((step, i) => (
+            <PipelineNode
+              key={step.id}
+              step={step}
+              cx={padding + i * gap}
+              index={i}
+              accent={i % 2 === 0 ? 'var(--color-amber)' : 'var(--color-teal)'}
+              compact={compact}
+            />
+          ))}
         </svg>
       </div>
     </div>

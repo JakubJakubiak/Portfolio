@@ -10,13 +10,13 @@ function onScroll() {
   }, 140)
 }
 
-function ensureScrollListener() {
+function ensure() {
   if (attached || typeof window === 'undefined') return
   attached = true
   window.addEventListener('scroll', onScroll, { passive: true })
 }
 
 export function isPageScrolling() {
-  ensureScrollListener()
+  ensure()
   return scrolling
 }

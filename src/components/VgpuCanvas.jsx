@@ -39,6 +39,7 @@ export default function VgpuCanvas({
   ariaHidden = true,
   onReady,
   onFail,
+  pauseOnScroll = false,
 }) {
   const canvasRef = useRef(null)
   const [ready, setReady] = useState(false)
@@ -96,7 +97,8 @@ export default function VgpuCanvas({
         const clk = clock(gpu)
 
         const loop = frameLoop(gpu, (frame) => {
-          if (disposed || document.hidden || !visible || isPageScrolling()) return
+          if (disposed || document.hidden || !visible) return
+          if (pauseOnScroll && isPageScrolling()) return
           const now = performance.now()
           if (now - lastDraw < MIN_FRAME_MS) return
           lastDraw = now
@@ -133,7 +135,7 @@ export default function VgpuCanvas({
       stopLoop()
       setReady(false)
     }
-  }, [shader, blend, clearColor, alphaMode, dpr, animate])
+  }, [shader, blend, clearColor, alphaMode, dpr, animate, pauseOnScroll])
 
   return (
     <canvas

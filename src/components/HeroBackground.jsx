@@ -43,6 +43,7 @@ export default function HeroBackground() {
           shader={heroBgShader}
           className="pointer-events-none absolute inset-0 h-full w-full"
           clearColor={[0.055, 0.062, 0.078, 1]}
+          pauseOnScroll
         />
       )}
     </>
