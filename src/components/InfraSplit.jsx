@@ -3,6 +3,22 @@ import { LayoutGroup, motion, useInView, useReducedMotion } from 'framer-motion'
 import infraSplitShader from '../shaders/infra-split.wgsl'
 import VgpuCanvas from './VgpuCanvas'
 
+function useDesktop() {
+  const [desktop, setDesktop] = useState(
+    () => typeof window !== 'undefined' && window.matchMedia('(min-width: 768px)').matches,
+  )
+
+  useEffect(() => {
+    const mq = window.matchMedia('(min-width: 768px)')
+    const sync = () => setDesktop(mq.matches)
+    sync()
+    mq.addEventListener('change', sync)
+    return () => mq.removeEventListener('change', sync)
+  }, [])
+
+  return desktop
+}
+
 function DockerLayer({ id, name, hot }) {
   return (
     <motion.div
@@ -28,7 +44,7 @@ function Rack({ title, subtitle, accent, children, reduce, from }) {
       initial={reduce ? false : { x: from, opacity: 0.55 }}
       animate={{ x: 0, opacity: 1 }}
       transition={{ type: 'spring', stiffness: 160, damping: 22, delay: 0.15 }}
-      className="relative z-10 w-[min(100%,220px)] shrink-0"
+      className="relative z-10 w-full md:w-[min(100%,220px)] shrink-0"
     >
       <p
         className="font-mono text-[10px] uppercase tracking-[0.2em] mb-2 text-center"
@@ -46,31 +62,58 @@ function Rack({ title, subtitle, accent, children, reduce, from }) {
   )
 }
 
-function PacketBridge({ live }) {
-  if (!live) {
-    return <div className="hidden md:block flex-1 h-12" />
-  }
+function PacketDots({ axis }) {
+  const isY = axis === 'y'
+  const a = isY ? 'ems-pkt-south' : 'ems-pkt-east'
+  const b = isY ? 'ems-pkt-north' : 'ems-pkt-west'
+  const pos = isY ? 'ems-pkt-y' : 'ems-pkt-x'
 
   return (
-    <div className="relative hidden md:flex flex-1 items-center self-center mx-2 h-12 min-w-[8rem]">
-      <div className="absolute inset-x-0 top-1/2 h-px bg-gradient-to-r from-[var(--color-amber)] via-[var(--color-line)] to-[var(--color-teal)] opacity-80" />
-      <div className="ems-pkt ems-pkt-amber" style={{ animationDelay: '0s' }} />
-      <div className="ems-pkt ems-pkt-amber" style={{ animationDelay: '0.62s' }} />
-      <div className="ems-pkt ems-pkt-teal" style={{ animationDelay: '0.2s' }} />
-      <div className="ems-pkt ems-pkt-teal" style={{ animationDelay: '0.95s' }} />
-      <span className="absolute left-1/2 -top-1 -translate-x-1/2 font-mono text-[9px] uppercase tracking-widest text-[var(--color-muted)]">
-        queries
-      </span>
-    </div>
+    <>
+      <div className={`ems-pkt ems-pkt-amber ${pos} ${a}`} style={{ animationDelay: '0s' }} />
+      <div className={`ems-pkt ems-pkt-amber ${pos} ${a}`} style={{ animationDelay: '0.62s' }} />
+      <div className={`ems-pkt ems-pkt-teal ${pos} ${b}`} style={{ animationDelay: '0.2s' }} />
+      <div className={`ems-pkt ems-pkt-teal ${pos} ${b}`} style={{ animationDelay: '0.95s' }} />
+    </>
+  )
+}
+
+function PacketBridge({ live }) {
+  return (
+    <>
+      <div className="relative md:hidden h-14 w-full">
+        {live && (
+          <>
+            <div className="absolute left-1/2 top-0 bottom-0 w-px -translate-x-1/2 bg-gradient-to-b from-[var(--color-amber)] via-[var(--color-line)] to-[var(--color-teal)] opacity-80" />
+            <PacketDots axis="y" />
+            <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-[var(--color-bg)] px-2 font-mono text-[9px] uppercase tracking-widest text-[var(--color-muted)]">
+              queries
+            </span>
+          </>
+        )}
+      </div>
+      <div className="relative hidden md:flex flex-1 items-center self-center mx-2 h-12 min-w-[8rem]">
+        {live && (
+          <>
+            <div className="absolute inset-x-0 top-1/2 h-px bg-gradient-to-r from-[var(--color-amber)] via-[var(--color-line)] to-[var(--color-teal)] opacity-80" />
+            <PacketDots axis="x" />
+            <span className="absolute left-1/2 -top-1 -translate-x-1/2 font-mono text-[9px] uppercase tracking-widest text-[var(--color-muted)]">
+              queries
+            </span>
+          </>
+        )}
+      </div>
+    </>
   )
 }
 
 export default function InfraSplit() {
   const reduce = useReducedMotion()
+  const desktop = useDesktop()
   const rootRef = useRef(null)
   const inView = useInView(rootRef, { once: true, margin: '-80px' })
   const [split, setSplit] = useState(Boolean(reduce))
-  const [failed, setFailed] = useState(false)
+  const [gpuFail, setGpuFail] = useState(false)
 
   useEffect(() => {
     if (!inView || reduce) return undefined
@@ -78,7 +121,7 @@ export default function InfraSplit() {
     return () => clearTimeout(t)
   }, [inView, reduce])
 
-  const showGpu = !reduce && !failed
+  const showGpu = desktop && !reduce && !gpuFail
 
   return (
     <div ref={rootRef} className="relative mt-16 md:mt-20">
@@ -91,16 +134,16 @@ export default function InfraSplit() {
           {showGpu && (
             <VgpuCanvas
               shader={infraSplitShader}
-              className="pointer-events-none absolute inset-0 hidden md:block h-full w-full opacity-70"
+              className="pointer-events-none absolute inset-0 h-full w-full opacity-70"
               blend="premultiplied"
               clearColor={[0, 0, 0, 0]}
               alphaMode="premultiplied"
               dpr={[1, 1.5]}
-              onFail={() => setFailed(true)}
+              onFail={() => setGpuFail(true)}
             />
           )}
 
-          <div className="relative z-10 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-6 md:gap-0 md:px-[2%] pt-2 pb-4">
+          <div className="relative z-10 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-2 md:gap-0 md:px-[2%] pt-2 pb-4">
             <Rack
               reduce={reduce}
               accent="amber"
@@ -119,10 +162,6 @@ export default function InfraSplit() {
             </Rack>
 
             <PacketBridge live={split && !reduce} />
-
-            <div className="md:hidden font-mono text-[10px] text-[var(--color-teal)] tracking-widest text-center">
-              {split ? '↓ store moves off ↓' : 'splitting…'}
-            </div>
 
             <Rack
               reduce={reduce}
