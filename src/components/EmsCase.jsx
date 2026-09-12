@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react'
 import { motion, useInView, useReducedMotion } from 'framer-motion'
 import { RotateCw } from 'lucide-react'
+import InfraSplit from './InfraSplit'
 import { useElapsedMs, useTimedProgress } from '../hooks/useTimedProgress'
 
 const R = 58
@@ -234,6 +235,7 @@ export default function EmsCase() {
         </motion.p>
 
         <RaceStage reduce={reduce} />
+        <InfraSplit />
       </div>
     </section>
   )

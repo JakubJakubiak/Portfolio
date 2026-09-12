@@ -84,3 +84,60 @@ body {
   vertical-align: -0.15em;
   animation: ems-blink 1.05s step-end infinite;
 }
+
+@keyframes ems-pkt-east {
+  0% {
+    left: 0%;
+    opacity: 0;
+  }
+  8% {
+    opacity: 1;
+  }
+  88% {
+    opacity: 1;
+  }
+  100% {
+    left: 100%;
+    opacity: 0;
+  }
+}
+
+@keyframes ems-pkt-west {
+  0% {
+    left: 100%;
+    opacity: 0;
+  }
+  8% {
+    opacity: 1;
+  }
+  88% {
+    opacity: 1;
+  }
+  100% {
+    left: 0%;
+    opacity: 0;
+  }
+}
+
+.ems-pkt {
+  position: absolute;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  margin-top: -5px;
+  margin-left: -5px;
+  border-radius: 999px;
+  pointer-events: none;
+}
+
+.ems-pkt-amber {
+  background: var(--color-amber);
+  box-shadow: 0 0 14px var(--color-amber);
+  animation: ems-pkt-east 1.85s linear infinite;
+}
+
+.ems-pkt-teal {
+  background: var(--color-teal);
+  box-shadow: 0 0 14px var(--color-teal);
+  animation: ems-pkt-west 2.15s linear infinite;
+}
