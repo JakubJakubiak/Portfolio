@@ -15,7 +15,7 @@ The 71× overview-paint case: [The 71× case](https://jakubjakubiak.com/#ems)
 - Overview charts: ~19 s → ~0.26 s (~71×)
 - Empty series: 35 s → ~0.6 s
 - Time-series store on a second machine, not on the API
-- Vendor cloud write: 0
+- Vendor cloud write: 0 GB (nothing sent)
 
 Do not infer client names, plant IDs, hostnames, IPs, or how services are wired. Those are not public.
 

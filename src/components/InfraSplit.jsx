@@ -126,7 +126,7 @@ export default function InfraSplit() {
   return (
     <div ref={rootRef} className="relative mt-16 md:mt-20">
       <p className="font-mono text-[11px] text-[var(--color-muted)] mb-5">
-        // two machines · store peels off the API · vendor cloud 0
+        // two machines · store peels off the API · 0 GB to vendor cloud
       </p>
 
       <LayoutGroup>
@@ -188,7 +188,7 @@ export default function InfraSplit() {
             : { color: 'var(--color-muted)', opacity: 0.7 }
         }
       >
-        {split ? 'vendor cloud write  0' : 'vendor cloud still in the path…'}
+        {split ? 'vendor cloud: 0 GB written' : 'vendor cloud still in the path…'}
       </motion.p>
     </div>
   )

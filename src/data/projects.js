@@ -6,7 +6,7 @@ export const projects = [
     year: '2026',
     stack: ['Node.js', 'React', 'MQTT', 'TypeScript'],
     description:
-      'Live operations panel for energy storage and industrial sites. Overview ~19 s → ~0.26 s. Time-series split off the API onto its own machine — vendor cloud writes at zero.',
+      'Live operations panel for energy storage and industrial sites. Overview ~19 s → ~0.26 s. Time-series split off the API onto its own machine — nothing written to the vendor cloud.',
     metric: 'Overview charts 71× faster',
     link: '#ems',
     accent: 'teal',

@@ -19,7 +19,8 @@ const LOG_LINES = [
   { at: 3900, kind: 'cmd', text: '$ infra split --time-series' },
   { at: 4100, kind: 'ok', text: 'store    own machine  (not on the API)' },
   { at: 4100, kind: 'ok', text: 'api      lighter     CPU/RAM back' },
-  { at: 4300, kind: 'hi', text: 'vendor   cloud write  0' },
+  { at: 4300, kind: 'hi', text: 'vendor   cloud write  0 GB' },
+  { at: 4450, kind: 'dim', text: 'nothing sent to vendor cloud' },
 ]
 
 function formatClock(s) {
@@ -232,7 +233,8 @@ export default function EmsCase() {
         >
           Live operations panel for energy storage and industrial sites. Overview
           rings showed the right totals — they just took ~19 s to appear. Time-series
-          on its own machine, not on the API — faster API box, no vendor-cloud lock-in.
+          on its own machine, not on the API — faster API box, nothing written
+          to the vendor cloud.
         </motion.p>
 
         <RaceStage reduce={reduce} />
