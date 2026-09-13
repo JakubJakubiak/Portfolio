@@ -1,6 +1,8 @@
 import {
   siTypescript,
   siJavascript,
+  siPython,
+  siRust,
   siDart,
   siDotnet,
   siReact,
@@ -21,6 +23,8 @@ import {
 const brand = {
   typescript: siTypescript,
   javascript: siJavascript,
+  python: siPython,
+  rust: siRust,
   dart: siDart,
   csharp: siDotnet,
   react: siReact,

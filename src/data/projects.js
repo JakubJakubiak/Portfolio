@@ -84,6 +84,8 @@ export const stack = [
     items: [
       { name: 'TypeScript', icon: 'typescript' },
       { name: 'JavaScript', icon: 'javascript' },
+      { name: 'Python', icon: 'python' },
+      { name: 'Rust', icon: 'rust' },
       { name: 'Dart', icon: 'dart' },
       { name: 'C#', icon: 'csharp' },
     ],
