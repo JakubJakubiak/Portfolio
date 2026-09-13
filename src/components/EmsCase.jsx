@@ -15,6 +15,7 @@ const LOG_LINES = [
   { at: 3180, kind: 'warn', text: 'before   query    timeout  ~3 s' },
   { at: 3200, kind: 'warn', text: 'before   paint    18.52 s' },
   { at: 3480, kind: 'hi', text: 'speedup  71.2×    −18.26 s' },
+  { at: 3650, kind: 'ok', text: 'perf     +7200%   vs 19 s' },
   { at: 3900, kind: 'cmd', text: '$ infra split --time-series' },
   { at: 4100, kind: 'ok', text: 'store    own machine  (not on the API)' },
   { at: 4100, kind: 'ok', text: 'api      lighter     CPU/RAM back' },
