@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import AgentPipeline from './AgentPipeline'
 import HeroBackground from './HeroBackground'
+import { track } from '../lib/track'
 
 export default function Hero() {
   return (
@@ -46,12 +47,14 @@ export default function Hero() {
         >
           <a
             href="#ems"
+            onClick={() => track('select_content', { content_type: 'case', item_id: 'ems' })}
             className="px-6 py-3 bg-[var(--color-amber)] text-[#0a0b0e] font-medium rounded-full hover:brightness-110 transition-all cursor-pointer"
           >
             The 71× case
           </a>
           <a
             href="#projects"
+            onClick={() => track('select_content', { content_type: 'nav', item_id: 'projects' })}
             className="px-6 py-3 border border-[var(--color-line)] rounded-full hover:border-[var(--color-teal)] hover:text-[var(--color-teal)] transition-colors cursor-pointer"
           >
             View projects

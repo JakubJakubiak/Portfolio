@@ -1,4 +1,5 @@
 import { Mail } from 'lucide-react'
+import { track } from '../lib/track'
 
 const GithubIcon = (props) => (
   <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" {...props}>
@@ -19,14 +20,15 @@ const XIcon = (props) => (
 )
 
 const links = [
-  { label: 'GitHub', href: 'https://github.com/JakubJakubiak', icon: GithubIcon },
+  { label: 'GitHub', href: 'https://github.com/JakubJakubiak', icon: GithubIcon, id: 'github' },
   {
     label: 'LinkedIn',
     href: 'https://www.linkedin.com/in/jakub-jakubiak-793213174/',
     icon: LinkedinIcon,
+    id: 'linkedin',
   },
-  { label: 'X / Twitter', href: 'https://x.com/InuDev_', icon: XIcon },
-  { label: 'Email', href: 'mailto:jakubjakubiakk@gmail.com', icon: Mail },
+  { label: 'X / Twitter', href: 'https://x.com/InuDev_', icon: XIcon, id: 'x' },
+  { label: 'Email', href: 'mailto:jakubjakubiakk@gmail.com', icon: Mail, id: 'email' },
 ]
 
 export default function Contact() {
@@ -41,12 +43,17 @@ export default function Contact() {
         </h2>
 
         <div className="flex flex-wrap justify-center gap-3 mt-10">
-          {links.map(({ label, href, icon: Icon }) => (
+          {links.map(({ label, href, icon: Icon, id }) => (
             <a
               key={label}
               href={href}
               target="_blank"
               rel="noreferrer"
+              onClick={() =>
+                id === 'email'
+                  ? track('generate_lead', { method: 'email' })
+                  : track('select_content', { content_type: 'social', item_id: id })
+              }
               className="flex items-center gap-2 px-5 py-2.5 rounded-full border border-[var(--color-line)] hover:border-[var(--color-amber)] hover:text-[var(--color-amber)] transition-colors cursor-pointer text-sm"
             >
               <Icon size={16} />

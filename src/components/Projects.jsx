@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import { ArrowUpRight } from 'lucide-react'
 import { projects } from '../data/projects'
+import { track } from '../lib/track'
 
 function ProjectCard({ project: p, index: i }) {
   const cardRef = useRef(null)
@@ -63,6 +64,11 @@ function ProjectCard({ project: p, index: i }) {
         ? {
             href: p.link,
             ...(isHash ? {} : { target: '_blank', rel: 'noreferrer' }),
+            onClick: () =>
+              track('select_content', {
+                content_type: isHash ? 'case' : 'project',
+                item_id: p.id,
+              }),
             className: `${cardClass} cursor-pointer`,
           }
         : { className: cardClass })}
