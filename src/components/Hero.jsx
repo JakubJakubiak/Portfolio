@@ -1,16 +1,20 @@
-import { motion } from 'framer-motion'
-import AgentPipeline from './AgentPipeline'
+import { lazy, Suspense } from 'react'
+import { motion, useReducedMotion } from 'framer-motion'
 import HeroBackground from './HeroBackground'
 import { track } from '../lib/track'
 
+const AgentPipeline = lazy(() => import('./AgentPipeline'))
+
 export default function Hero() {
+  const reduce = useReducedMotion()
+
   return (
-    <section className="relative min-h-[92vh] flex flex-col justify-center px-6 md:px-12 pt-28 pb-16 overflow-hidden">
+    <section className="relative min-h-[92vh] flex flex-col justify-center px-6 md:px-12 pt-28 pb-16 overflow-x-clip">
       <HeroBackground />
 
       <div className="relative z-10 max-w-5xl mx-auto w-full">
         <motion.p
-          initial={{ opacity: 0, y: 8 }}
+          initial={reduce ? false : { opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           className="font-mono text-sm text-[var(--color-teal)] mb-6"
@@ -18,21 +22,16 @@ export default function Hero() {
           $ whoami
         </motion.p>
 
-        <motion.h1
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="font-[var(--font-display)] text-balance text-[13vw] leading-[0.95] md:text-[6.5rem] font-semibold tracking-tight"
-        >
+        <h1 className="font-[var(--font-display)] text-balance text-[13vw] leading-[0.95] md:text-[6.5rem] font-semibold tracking-tight">
           Jakub
           <br />
           Jakubiak
-        </motion.h1>
+        </h1>
 
         <motion.p
-          initial={{ opacity: 0, y: 12 }}
+          initial={reduce ? false : { opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          transition={{ duration: 0.5, delay: reduce ? 0 : 0.1 }}
           className="mt-6 max-w-xl text-lg text-[var(--color-muted)]"
         >
           Full Stack Engineer at Ennovation Technology — industrial energy
@@ -40,9 +39,9 @@ export default function Hero() {
         </motion.p>
 
         <motion.div
-          initial={{ opacity: 0, y: 12 }}
+          initial={reduce ? false : { opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
+          transition={{ duration: 0.5, delay: reduce ? 0 : 0.15 }}
           className="mt-8 flex flex-wrap items-center gap-4"
         >
           <a
@@ -62,17 +61,14 @@ export default function Hero() {
         </motion.div>
       </div>
 
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.8, delay: 0.5 }}
-        className="relative z-10 max-w-5xl mx-auto w-full mt-20"
-      >
+      <div className="relative z-10 max-w-5xl mx-auto w-full mt-20">
         <p className="font-mono text-xs text-[var(--color-muted)] mb-3">
           // how a typical request moves through my agent stack
         </p>
-        <AgentPipeline />
-      </motion.div>
+        <Suspense fallback={<div className="h-[108px] sm:h-[160px]" />}>
+          <AgentPipeline />
+        </Suspense>
+      </div>
     </section>
   )
 }

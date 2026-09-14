@@ -199,7 +199,7 @@ export default function EmsCase() {
   return (
     <section
       id="ems"
-      className="relative px-6 md:px-12 py-24 border-t border-[var(--color-line)] overflow-hidden scroll-mt-20"
+      className="relative px-6 md:px-12 py-24 border-t border-[var(--color-line)] overflow-x-clip scroll-mt-20"
     >
       <div className="pointer-events-none absolute inset-0 max-md:hidden" aria-hidden>
         <div className="absolute top-0 right-0 h-[420px] w-[420px] rounded-full bg-[var(--color-teal)]/8 blur-[120px]" />

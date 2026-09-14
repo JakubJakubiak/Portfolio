@@ -1,14 +1,14 @@
 import { lazy, Suspense, useEffect, useRef, useState } from 'react'
 import { LayoutGroup, motion, useInView, useReducedMotion } from 'framer-motion'
-import { useGpuOk } from '../hooks/useDesktop'
+import { useGpuOk, useDesktop } from '../hooks/useDesktop'
 
 const InfraSplitGpu = lazy(() => import('./InfraSplitGpu'))
 
-function DockerLayer({ id, name, hot }) {
+function DockerLayer({ id, name, hot, fly }) {
   return (
     <motion.div
-      layoutId={id}
-      transition={{ type: 'spring', stiffness: 280, damping: 28 }}
+      layoutId={fly ? id : undefined}
+      transition={fly ? { type: 'spring', stiffness: 280, damping: 28 } : { duration: 0 }}
       className="rounded-md border px-2.5 py-1.5 font-mono text-[11px]"
       style={{
         borderColor: hot ? hot : 'var(--color-line)',
@@ -26,7 +26,7 @@ function Rack({ title, subtitle, accent, children, reduce, from }) {
 
   return (
     <motion.div
-      initial={reduce ? false : { x: from, opacity: 0.55 }}
+      initial={reduce || !from ? false : { x: from, opacity: 0.55 }}
       animate={{ x: 0, opacity: 1 }}
       transition={{ type: 'spring', stiffness: 160, damping: 22, delay: 0.15 }}
       className="relative z-10 w-full md:w-[min(100%,220px)] shrink-0"
@@ -94,17 +94,27 @@ function PacketBridge({ live }) {
 
 export default function InfraSplit() {
   const reduce = useReducedMotion()
+  const desktop = useDesktop()
   const gpuOk = useGpuOk()
   const rootRef = useRef(null)
   const inView = useInView(rootRef, { once: true, margin: '-80px' })
-  const [split, setSplit] = useState(Boolean(reduce))
+  const [split, setSplit] = useState(
+    () =>
+      typeof window !== 'undefined' &&
+      (window.matchMedia('(max-width: 767px)').matches ||
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches),
+  )
   const [gpuFail, setGpuFail] = useState(false)
+  const fly = desktop && !reduce
 
   useEffect(() => {
-    if (!inView || reduce) return undefined
+    if (!inView || reduce || !desktop) {
+      setSplit(true)
+      return undefined
+    }
     const t = setTimeout(() => setSplit(true), 700)
     return () => clearTimeout(t)
-  }, [inView, reduce])
+  }, [inView, reduce, desktop])
 
   const showGpu = gpuOk && !reduce && !gpuFail
 
@@ -124,18 +134,18 @@ export default function InfraSplit() {
 
           <div className="relative z-10 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-2 md:gap-0 md:px-[2%] pt-2 pb-4">
             <Rack
-              reduce={reduce}
+              reduce={reduce || !desktop}
               accent="amber"
               title="API"
               subtitle={split ? 'lighter box' : 'one box · crowded'}
-              from={reduce ? 0 : 72}
+              from={reduce || !desktop ? 0 : 72}
             >
-              <DockerLayer id="layer-app" name="app" hot="var(--color-amber)" />
-              <DockerLayer id="layer-workers" name="workers" />
+              <DockerLayer fly={fly} id="layer-app" name="app" hot="var(--color-amber)" />
+              <DockerLayer fly={fly} id="layer-workers" name="workers" />
               {!split && (
                 <>
-                  <DockerLayer id="layer-store" name="store" hot="var(--color-teal)" />
-                  <DockerLayer id="layer-ingest" name="ingest" />
+                  <DockerLayer fly={fly} id="layer-store" name="store" hot="var(--color-teal)" />
+                  <DockerLayer fly={fly} id="layer-ingest" name="ingest" />
                 </>
               )}
             </Rack>
@@ -143,16 +153,16 @@ export default function InfraSplit() {
             <PacketBridge live={split && !reduce} />
 
             <Rack
-              reduce={reduce}
+              reduce={reduce || !desktop}
               accent="teal"
               title="Time-series"
               subtitle={split ? 'own machine' : '—'}
-              from={reduce ? 0 : -72}
+              from={reduce || !desktop ? 0 : -72}
             >
               {split && (
                 <>
-                  <DockerLayer id="layer-store" name="store" hot="var(--color-teal)" />
-                  <DockerLayer id="layer-ingest" name="ingest" />
+                  <DockerLayer fly={fly} id="layer-store" name="store" hot="var(--color-teal)" />
+                  <DockerLayer fly={fly} id="layer-ingest" name="ingest" />
                 </>
               )}
             </Rack>
