@@ -141,8 +141,11 @@ function ProjectCard({ project: p, index: i }) {
             <img
               src={p.image}
               alt=""
+              width="400"
+              height="800"
               className="h-full w-full object-contain object-bottom"
               loading="lazy"
+              decoding="async"
             />
           )}
         </div>

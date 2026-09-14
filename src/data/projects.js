@@ -22,7 +22,7 @@ export const projects = [
     metric: 'Live on Google Play',
     link: 'https://play.google.com/store/apps/details?id=com.night.multimindbot',
     accent: 'teal',
-    image: '/projects/multimind.png',
+    image: '/projects/multimind.webp',
   },
   {
     id: 'human-or-ai',
@@ -35,7 +35,7 @@ export const projects = [
     metric: 'Live on Google Play',
     link: 'https://play.google.com/store/apps/details?id=inu.night.humanAI',
     accent: 'amber',
-    image: '/projects/human-ai.png',
+    image: '/projects/human-ai.webp',
   },
   {
     id: 'plant-identifier',
@@ -48,7 +48,7 @@ export const projects = [
     metric: 'Live on Google Play',
     link: 'https://play.google.com/store/apps/details?id=com.inu.plantsai',
     accent: 'teal',
-    image: '/projects/plant.png',
+    image: '/projects/plant.webp',
   },
   {
     id: 'caption-ai',
@@ -61,7 +61,7 @@ export const projects = [
     metric: 'Image → caption pipeline',
     link: 'https://github.com/JakubJakubiak',
     accent: 'amber',
-    image: '/projects/caption.png',
+    image: '/projects/caption.webp',
   },
   {
     id: 'tinder-twitch',

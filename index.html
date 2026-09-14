@@ -20,13 +20,10 @@
         s.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-KPGKPC6T'
         document.head.appendChild(s)
       }
-      if ('requestIdleCallback' in window) {
-        requestIdleCallback(loadGtm, { timeout: 2500 })
-      } else {
-        window.addEventListener('load', function () {
-          setTimeout(loadGtm, 1)
-        })
-      }
+      ;['pointerdown', 'keydown', 'scroll', 'touchstart'].forEach(function (evt) {
+        window.addEventListener(evt, loadGtm, { once: true, passive: true })
+      })
+      window.setTimeout(loadGtm, 8000)
     </script>
     <!-- End Google Tag Manager -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -34,13 +31,13 @@
     <link
       rel="preload"
       as="style"
-      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=optional"
       onload="this.onload=null;this.rel='stylesheet'"
     />
     <noscript>
       <link
         rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=optional"
       />
     </noscript>
     <link rel="icon" href="/favicon.ico" sizes="any" />
@@ -128,13 +125,7 @@
       ></iframe>
     </noscript>
     <!-- End Google Tag Manager (noscript) -->
-    <div id="root">
-      <section style="padding:7rem 1.5rem 4rem;font-family:system-ui,sans-serif">
-        <h1 style="font-size:clamp(2.6rem,13vw,6.5rem);line-height:0.95;margin:0;font-weight:700">
-          Jakub<br />Jakubiak
-        </h1>
-      </section>
-    </div>
+    <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
