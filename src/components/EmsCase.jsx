@@ -40,7 +40,7 @@ function Donut({ progress, accent, label, clock, done }) {
       <div className="relative size-[160px] overflow-visible">
         <div
           aria-hidden
-          className="pointer-events-none absolute left-1/2 top-1/2 size-[118px] -translate-x-1/2 -translate-y-1/2 rounded-full"
+          className="pointer-events-none absolute left-1/2 top-1/2 size-[118px] -translate-x-1/2 -translate-y-1/2 rounded-full max-md:hidden"
           style={{
             background: accent,
             opacity: 0.16 + progress * 0.28,
@@ -201,7 +201,7 @@ export default function EmsCase() {
       id="ems"
       className="relative px-6 md:px-12 py-24 border-t border-[var(--color-line)] overflow-hidden scroll-mt-20"
     >
-      <div className="pointer-events-none absolute inset-0" aria-hidden>
+      <div className="pointer-events-none absolute inset-0 max-md:hidden" aria-hidden>
         <div className="absolute top-0 right-0 h-[420px] w-[420px] rounded-full bg-[var(--color-teal)]/8 blur-[120px]" />
         <div className="absolute bottom-0 left-0 h-[320px] w-[320px] rounded-full bg-[var(--color-amber)]/8 blur-[100px]" />
       </div>

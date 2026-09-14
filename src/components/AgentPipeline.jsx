@@ -1,8 +1,10 @@
-import { useEffect, useState } from 'react'
+import { lazy, Suspense, useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { pipeline } from '../data/projects'
 import { usePipelineSignal } from '../hooks/usePipelineSignal'
-import PipelineFlow from './PipelineFlow'
+import { useGpuOk } from '../hooks/useDesktop'
+
+const PipelineFlow = lazy(() => import('./PipelineFlow'))
 
 function useCompact() {
   const [compact, setCompact] = useState(
@@ -40,11 +42,15 @@ function PipelineNode({ step, cx, index, accent, compact }) {
         fill="var(--color-surface)"
         stroke={accent}
         strokeWidth="1.6"
-        style={{
-          filter: isAmber
-            ? 'drop-shadow(0 0 10px var(--color-amber))'
-            : 'drop-shadow(0 0 10px var(--color-teal))',
-        }}
+        style={
+          compact
+            ? undefined
+            : {
+                filter: isAmber
+                  ? 'drop-shadow(0 0 10px var(--color-amber))'
+                  : 'drop-shadow(0 0 10px var(--color-teal))',
+              }
+        }
       />
       <text
         x={cx}
@@ -187,6 +193,7 @@ function NeonTrack({ padding, innerWidth, compact }) {
 
 export default function AgentPipeline() {
   const compact = useCompact()
+  const gpuOk = useGpuOk()
   const nodeCount = pipeline.length
   const padding = compact ? 36 : 72
   const innerWidth = compact ? 488 : 852
@@ -197,7 +204,11 @@ export default function AgentPipeline() {
   return (
     <div className="relative w-full overflow-hidden">
       <div className="relative w-full" style={{ aspectRatio: `${width} / ${height}` }}>
-        {!compact && <PipelineFlow />}
+        {gpuOk && (
+          <Suspense fallback={null}>
+            <PipelineFlow />
+          </Suspense>
+        )}
 
         <svg
           viewBox={`0 0 ${width} ${height}`}

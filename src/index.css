@@ -180,6 +180,13 @@ body {
   box-shadow: 0 0 14px var(--color-teal);
 }
 
+@media (max-width: 767px) {
+  .ems-pkt-amber,
+  .ems-pkt-teal {
+    box-shadow: none;
+  }
+}
+
 .ems-pkt-east {
   animation: ems-pkt-east 1.85s linear infinite;
 }

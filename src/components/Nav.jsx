@@ -38,7 +38,7 @@ export default function Nav() {
           style={{ transform: 'scaleX(0)' }}
         />
       </div>
-      <nav className="flex items-center justify-between px-6 md:px-12 py-5 bg-[var(--color-bg)]/80 backdrop-blur-sm">
+      <nav className="flex items-center justify-between px-6 md:px-12 py-5 bg-[var(--color-bg)] md:bg-[var(--color-bg)]/80 md:backdrop-blur-sm">
         <a href="/" className="flex items-center gap-2 font-[var(--font-display)] font-semibold text-lg tracking-tight">
           <img src="/logo-64.webp" alt="" width="28" height="28" className="size-7 shrink-0" />
           Inu<span className="text-[var(--color-amber)]">.</span>dev

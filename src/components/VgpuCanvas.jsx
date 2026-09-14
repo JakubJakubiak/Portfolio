@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { isPageScrolling } from '../hooks/isPageScrolling'
+import { canUseGpuFx } from '../hooks/useDesktop'
 
 const DEFAULT_DPR = [1, 1.25]
 const MIN_FRAME_MS = 1000 / 60
@@ -49,7 +50,7 @@ export default function VgpuCanvas({
     if (!canvas || !shader) return undefined
 
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    if (reducedMotion || !animate) {
+    if (reducedMotion || !animate || !canUseGpuFx()) {
       onFail?.()
       return undefined
     }
@@ -151,7 +152,7 @@ export function useWebGpuAvailable() {
 
   useEffect(() => {
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    if (reduced || !navigator.gpu) {
+    if (reduced || !navigator.gpu || !canUseGpuFx()) {
       setAvailable(false)
       return
     }

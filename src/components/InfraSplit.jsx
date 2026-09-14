@@ -1,23 +1,8 @@
-import { useEffect, useRef, useState } from 'react'
+import { lazy, Suspense, useEffect, useRef, useState } from 'react'
 import { LayoutGroup, motion, useInView, useReducedMotion } from 'framer-motion'
-import infraSplitShader from '../shaders/infra-split.wgsl'
-import VgpuCanvas from './VgpuCanvas'
+import { useGpuOk } from '../hooks/useDesktop'
 
-function useDesktop() {
-  const [desktop, setDesktop] = useState(
-    () => typeof window !== 'undefined' && window.matchMedia('(min-width: 768px)').matches,
-  )
-
-  useEffect(() => {
-    const mq = window.matchMedia('(min-width: 768px)')
-    const sync = () => setDesktop(mq.matches)
-    sync()
-    mq.addEventListener('change', sync)
-    return () => mq.removeEventListener('change', sync)
-  }, [])
-
-  return desktop
-}
+const InfraSplitGpu = lazy(() => import('./InfraSplitGpu'))
 
 function DockerLayer({ id, name, hot }) {
   return (
@@ -109,7 +94,7 @@ function PacketBridge({ live }) {
 
 export default function InfraSplit() {
   const reduce = useReducedMotion()
-  const desktop = useDesktop()
+  const gpuOk = useGpuOk()
   const rootRef = useRef(null)
   const inView = useInView(rootRef, { once: true, margin: '-80px' })
   const [split, setSplit] = useState(Boolean(reduce))
@@ -121,7 +106,7 @@ export default function InfraSplit() {
     return () => clearTimeout(t)
   }, [inView, reduce])
 
-  const showGpu = desktop && !reduce && !gpuFail
+  const showGpu = gpuOk && !reduce && !gpuFail
 
   return (
     <div ref={rootRef} className="relative mt-16 md:mt-20">
@@ -132,14 +117,9 @@ export default function InfraSplit() {
       <LayoutGroup>
         <div className="relative min-h-[240px] md:min-h-[280px]">
           {showGpu && (
-            <VgpuCanvas
-              shader={infraSplitShader}
-              className="pointer-events-none absolute inset-0 h-full w-full opacity-70"
-              blend="premultiplied"
-              clearColor={[0, 0, 0, 0]}
-              alphaMode="premultiplied"
-              onFail={() => setGpuFail(true)}
-            />
+            <Suspense fallback={null}>
+              <InfraSplitGpu onFail={() => setGpuFail(true)} />
+            </Suspense>
           )}
 
           <div className="relative z-10 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-2 md:gap-0 md:px-[2%] pt-2 pb-4">
