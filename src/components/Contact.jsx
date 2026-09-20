@@ -35,11 +35,11 @@ export default function Contact() {
   return (
     <section id="contact" className="px-6 md:px-12 py-24 border-t border-[var(--color-line)]">
       <div className="max-w-5xl mx-auto text-center">
-        <p className="font-mono text-sm text-[var(--color-teal)] mb-4">// let&apos;s talk</p>
+        <p className="font-mono text-sm text-[var(--color-teal)] mb-4">// contact</p>
         <h2 className="font-[var(--font-display)] text-4xl md:text-6xl font-semibold text-balance mb-8">
-          Building something with LLMs?
+          Industrial systems, distributed infrastructure, or agentic LLM integrations.
           <br />
-          I&apos;d love to help.
+          Open to collaboration.
         </h2>
 
         <div className="flex flex-wrap justify-center gap-3 mt-10">

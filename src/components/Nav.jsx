@@ -26,6 +26,9 @@ export default function Nav() {
     return () => {
       window.removeEventListener('scroll', onScroll)
       if (raf) cancelAnimationFrame(raf)
+
+
+        
     }
   }, [])
 
@@ -43,7 +46,8 @@ export default function Nav() {
           <img src="/logo-64.webp" alt="" width="28" height="28" className="size-7 shrink-0" />
           Inu<span className="text-[var(--color-amber)]">.</span>dev
         </a>
-        <div className="hidden sm:flex items-center gap-8 font-mono text-xs text-[var(--color-muted)]">
+        <div className="hidden sm:flex items-center gap-5 md:gap-8 font-mono text-xs text-[var(--color-muted)]">
+          <a href="#focus" className="hover:text-[var(--color-text)] transition-colors cursor-pointer">focus</a>
           <a href="#ems" className="hover:text-[var(--color-text)] transition-colors cursor-pointer">case</a>
           <a href="#projects" className="hover:text-[var(--color-text)] transition-colors cursor-pointer">projects</a>
           <a href="#stack" className="hover:text-[var(--color-text)] transition-colors cursor-pointer">stack</a>

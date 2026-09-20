@@ -1,6 +1,7 @@
 import { lazy, Suspense } from 'react'
 import Nav from './components/Nav'
 import Hero from './components/Hero'
+import Overview from './components/Overview'
 import WhenVisible from './components/WhenVisible'
 
 const EmsCase = lazy(() => import('./components/EmsCase'))
@@ -22,6 +23,7 @@ export default function App() {
       <Nav />
       <main>
         <Hero />
+        <Overview />
         <Gate minHeight={720}>
           <EmsCase />
         </Gate>

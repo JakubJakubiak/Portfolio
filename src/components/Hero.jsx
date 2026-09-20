@@ -18,9 +18,15 @@ export default function Hero() {
           Jakubiak
         </h1>
 
+        <p className="mt-5 font-mono text-sm text-[var(--color-teal)]">
+          Full Stack Engineer — IoT, Distributed Systems, Infrastructure & AI
+        </p>
+
         <p className="mt-6 max-w-xl text-lg text-[var(--color-muted)]">
-          Full Stack Engineer at Ennovation Technology — industrial energy
-          dashboards, LLM integrations, and agentic tooling. Warsaw, Poland.
+          Software and AI systems for industrial operational performance.
+          Python backend and full-stack engineering at Ennovation Technology
+          in Warsaw — distributed IoT, time-series data architecture, LLM
+          integrations, and agentic tooling.
         </p>
 
         <div className="mt-8 flex flex-wrap items-center gap-4">
@@ -43,7 +49,7 @@ export default function Hero() {
 
       <div className="relative z-10 max-w-5xl mx-auto w-full mt-20">
         <p className="font-mono text-xs text-[var(--color-muted)] mb-3">
-          // how a typical request moves through my agent stack
+          // request path: retrieval, inference, tool execution
         </p>
         <Suspense fallback={<div className="h-[108px] sm:h-[160px]" />}>
           <AgentPipeline />

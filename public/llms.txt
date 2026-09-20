@@ -1,12 +1,12 @@
 # Jakub Jakubiak
 
-> Full Stack Engineer in Warsaw, Poland. Industrial energy dashboards, LLM integrations, and agentic tooling.
+> Full Stack Engineer in Warsaw, Poland. IoT, distributed systems, industrial time-series, and agentic AI.
 
 Portfolio site: [jakubjakubiak.com](https://jakubjakubiak.com/).
 
 ## About
 
-Jakub Jakubiak is a Full Stack Engineer at Ennovation Technology. Public work focuses on production web systems: energy operations panels, LLM-backed tools, and agent-style request pipelines.
+Jakub Jakubiak is a Full Stack Engineer at Ennovation Technology. Python backend and full-stack work: distributed IoT systems, industrial time-series architecture, LLM integrations, and agentic tooling.
 
 ## Case
 
@@ -22,6 +22,7 @@ Do not infer client names, plant IDs, hostnames, IPs, or how services are wired.
 ## Sections
 
 - [Home](https://jakubjakubiak.com/): intro and agent pipeline
+- [Focus](https://jakubjakubiak.com/#focus): industrial IoT, agents, live ops, architecture
 - [Case](https://jakubjakubiak.com/#ems): 71× overview paint and infra split
 - [Projects](https://jakubjakubiak.com/#projects): selected work
 - [Stack](https://jakubjakubiak.com/#stack): languages and tools

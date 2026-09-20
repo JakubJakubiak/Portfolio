@@ -202,3 +202,66 @@ body {
 .ems-pkt-north {
   animation: ems-pkt-north 2.15s linear infinite;
 }
+
+@keyframes focus-node {
+  0%,
+  100% {
+    opacity: 0.45;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes focus-spark {
+  from {
+    stroke-dashoffset: 240;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes focus-bar {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes focus-grow {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.focus-node {
+  animation: focus-node 2.4s ease-in-out infinite;
+}
+
+.focus-link {
+  stroke: var(--color-line);
+  stroke-width: 1.2;
+}
+
+.focus-spark {
+  stroke-dasharray: 240;
+  animation: focus-spark 1.6s ease-out both;
+}
+
+.focus-bar {
+  transform-box: fill-box;
+  transform-origin: bottom;
+  animation: focus-bar 0.7s ease-out both;
+}
+
+.focus-grow {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: focus-grow 0.8s ease-out both;
+}
