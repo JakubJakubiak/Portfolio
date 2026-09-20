@@ -1,12 +1,23 @@
 # Jakub Jakubiak
 
-> Full Stack Engineer in Warsaw, Poland. IoT, distributed systems, industrial time-series, and agentic AI.
+> Full Stack Engineer — IoT, Distributed Systems, Infrastructure & AI. Warsaw, Poland.
 
 Portfolio site: [jakubjakubiak.com](https://jakubjakubiak.com/).
 
 ## About
 
-Jakub Jakubiak is a Full Stack Engineer at Ennovation Technology. Python backend and full-stack work: distributed IoT systems, industrial time-series architecture, LLM integrations, and agentic tooling.
+Jakub Jakubiak is a Full Stack Engineer at Ennovation Technology in Warsaw. Software and AI systems for industrial operational performance. Python backend and full-stack engineering: distributed IoT, time-series data architecture, LLM integrations, and agentic tooling.
+
+## Focus
+
+High-performance engineering. Four areas of work:
+
+1. **Industrial IoT & distributed systems** — fault-tolerant backend infrastructure for reliable high-frequency telemetry streams in industrial plants and energy storage facilities.
+2. **Agentic stacks & LLM** — agentic stacks on large language models: contextual retrieval, inference, and automated API execution.
+3. **Time-series dashboards** — low-latency live operations panels for energy parameters and production-line performance monitoring.
+4. **Technical minimalism** — performance, code simplicity, and data privacy as first-order constraints. Pragmatic architecture oriented toward industrial utility.
+
+Technical values: performance (real-time throughput, minimal latency), efficiency (no superfluous layers, lower compute consumption), data privacy (edge processing, isolation of operational data and AI models).
 
 ## Case
 
@@ -21,12 +32,12 @@ Do not infer client names, plant IDs, hostnames, IPs, or how services are wired.
 
 ## Sections
 
-- [Home](https://jakubjakubiak.com/): intro and agent pipeline
-- [Focus](https://jakubjakubiak.com/#focus): industrial IoT, agents, live ops, architecture
-- [Case](https://jakubjakubiak.com/#ems): 71× overview paint and infra split
+- [Home](https://jakubjakubiak.com/): intro and agent pipeline (retrieval, inference, tool execution)
+- [Focus](https://jakubjakubiak.com/#focus): industrial IoT, agentic LLM stacks, operations panels, architecture
+- [Case](https://jakubjakubiak.com/#ems): 71× overview paint and infrastructure split
 - [Projects](https://jakubjakubiak.com/#projects): selected work
 - [Stack](https://jakubjakubiak.com/#stack): languages and tools
-- [Contact](https://jakubjakubiak.com/#contact): email and socials
+- [Contact](https://jakubjakubiak.com/#contact): industrial systems, distributed infrastructure, agentic LLM integrations
 
 ## Contact
 
