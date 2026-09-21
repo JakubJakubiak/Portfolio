@@ -13,4 +13,7 @@ Allow: /
 User-agent: Google-Extended
 Allow: /
 
+# Curated source for language models
+# https://jakubjakubiak.com/llms.txt
+
 Sitemap: https://jakubjakubiak.com/sitemap.xml

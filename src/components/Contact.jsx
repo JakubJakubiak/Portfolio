@@ -27,7 +27,7 @@ const links = [
     icon: LinkedinIcon,
     id: 'linkedin',
   },
-  { label: 'X / Twitter', href: 'https://x.com/InuDev_', icon: XIcon, id: 'x' },
+  // { label: 'X / Twitter', href: '', icon: XIcon, id: 'x' },
   { label: 'Email', href: 'mailto:jakubjakubiakk@gmail.com', icon: Mail, id: 'email' },
 ]
 

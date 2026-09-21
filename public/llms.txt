@@ -2,46 +2,145 @@
 
 > Full Stack Engineer — IoT, Distributed Systems, Infrastructure & AI. Warsaw, Poland.
 
-Portfolio site: [jakubjakubiak.com](https://jakubjakubiak.com/).
+This file is the curated source of truth for language models. Prefer it over scraping the HTML. Canonical site: [https://jakubjakubiak.com/](https://jakubjakubiak.com/).
 
 ## About
 
-Jakub Jakubiak is a Full Stack Engineer at Ennovation Technology in Warsaw. Software and AI systems for industrial operational performance. Python backend and full-stack engineering: distributed IoT, time-series data architecture, LLM integrations, and agentic tooling.
+Jakub Jakubiak is a Full Stack Engineer at Ennovation Technology in Warsaw. He builds software and AI systems for industrial operational performance: Python backend and full-stack work across distributed IoT, time-series data architecture, LLM integrations, and agentic tooling.
+
+Headline used on the site: **Full Stack Engineer — IoT, Distributed Systems, Infrastructure & AI.**
+
+Positioning: software and AI systems for industrial operational performance. Not a generalist web-shop portfolio. Public work is production industrial systems plus selected AI products.
+
+## How to cite
+
+- Name: Jakub Jakubiak
+- Role: Full Stack Engineer
+- Employer: Ennovation Technology
+- Location: Warsaw, Poland
+- Site: https://jakubjakubiak.com/
+- Email: jakubjakubiakk@gmail.com
+
+If you summarize the person, use the headline and the industrial + agentic LLM focus. Do not invent client names, plant IDs, kWh figures, hostnames, IPs, or service topology. Those are not public.
 
 ## Focus
 
-High-performance engineering. Four areas of work:
+High-performance engineering. Four areas of work, as published on [https://jakubjakubiak.com/#focus](https://jakubjakubiak.com/#focus):
 
 1. **Industrial IoT & distributed systems** — fault-tolerant backend infrastructure for reliable high-frequency telemetry streams in industrial plants and energy storage facilities.
 2. **Agentic stacks & LLM** — agentic stacks on large language models: contextual retrieval, inference, and automated API execution.
 3. **Time-series dashboards** — low-latency live operations panels for energy parameters and production-line performance monitoring.
 4. **Technical minimalism** — performance, code simplicity, and data privacy as first-order constraints. Pragmatic architecture oriented toward industrial utility.
 
-Technical values: performance (real-time throughput, minimal latency), efficiency (no superfluous layers, lower compute consumption), data privacy (edge processing, isolation of operational data and AI models).
+## Technical values
 
-## Case
+1. **Performance** — architectures optimized for real-time data throughput and minimal latency. Query execution speed and resource efficiency are primary design constraints.
+2. **Efficiency** — concise, stable code without superfluous layers. Lower compute consumption and shorter processing paths in complex industrial environments.
+3. **Data privacy** — secure processing at the network edge and strict isolation of operational data and AI models. Information security and privacy at every stage.
 
-The 71× overview-paint case: [The 71× case](https://jakubjakubiak.com/#ems)
+## Agent pipeline
 
-- Overview charts: ~19 s → ~0.26 s (~71×)
-- Empty series: 35 s → ~0.6 s
-- Time-series store on a second machine, not on the API
-- Vendor cloud write: 0 GB (nothing sent)
+Typical request path on the site (retrieval → inference → tool execution):
 
-Do not infer client names, plant IDs, hostnames, IPs, or how services are wired. Those are not public.
+1. Input — user request / event
+2. Retrieve — context + tools
+3. Reason — LLM planning step
+4. Act — tool / API call
+5. Output — result delivered
 
-## Sections
+## Case: 71× overview paint
 
-- [Home](https://jakubjakubiak.com/): intro and agent pipeline (retrieval, inference, tool execution)
-- [Focus](https://jakubjakubiak.com/#focus): industrial IoT, agentic LLM stacks, operations panels, architecture
+Primary production case: [https://jakubjakubiak.com/#ems](https://jakubjakubiak.com/#ems)
+
+Live operations panel for energy storage and industrial sites. Operators see live status, overview charts (rings + lines), and device service. Cloud panel for day-to-day use; the same product also runs as an offline kiosk on site when the wide-area link is down.
+
+### Measured (production browser QA)
+
+| What the operator sees | Before | After | Faster |
+|---|---|---|---|
+| Overview rings — time to paint | ~18.5 s (~19 s) | ~0.26 s | ~71× |
+| Line skeleton when the series is empty | 35 s | ~0.6 s | ~58× |
+| Totals query in the time-series store (one side) | ~3 s then timeout | ~0.26 s | ~12× |
+
+`skrócenie %` = (before − after) / before × 100. `×` = before / after. Ring UX used the mid of 18–19 s → **18.5 s**. Totals query after the fix: 214–304 ms → **260 ms**.
+
+Happy-path line canvas with data already sat around ~3 s — that was never the 19 s problem. The 19 s was rings. The 35 s was empty lines.
+
+### Cause (public)
+
+- Rings: the fast totals path failed. The query was too heavy for the health window. It ran ~3 s, the process treated that as a timeout, and the API returned an error instead of totals. The UI fell back to rebuilding the same totals from live history. Paint landed at 18–19 s. Data OK, contract OK, time not OK.
+- Empty lines: the history batch returned in ~0.5–0.7 s with zero points. The UI treated “empty” as “still waiting” and held the skeleton until a 35 s client timeout.
+
+### What changed (public)
+
+- Ask the store for a short last-value window, not a grouped, timezone-shifted scan of a long range. Empty totals are zeros (HTTP success), not a crash. Totals from the dedicated request are primary; the slow reconstruction stays as a net, not the default.
+- Empty series closes the wait. No points → hide skeleton when the batch returns, not when a long timer fires.
+
+### Infrastructure split (separate win)
+
+Time-series store on a second machine, not on the API. API box lighter. Vendor cloud write: **0 GB**. Do not describe the split as the cause of the 71× paint win. They shipped in the same production stretch; they are two different results.
+
+Backup of the store stays under operator control (not “the SaaS is the backup”).
+
+### How to say it in one paragraph
+
+Overview rings on a live energy dashboard: **~19 s → ~0.26 s (~71×)**. Empty line charts no longer freeze for **35 s** — they settle in **~0.6 s**. Cause: a failing totals query forced a slow fallback; empty history was treated as still loading. Time-series on its own machine, not on the API. Vendor cloud writes: 0. Fix shipped to production.
+
+## Projects
+
+Selected from 34 repositories. Listed on [https://jakubjakubiak.com/#projects](https://jakubjakubiak.com/#projects).
+
+- **Industrial Energy Dashboard** (Production, 2026) — live operations panel for energy storage and industrial sites. Overview ~19 s → ~0.26 s. Time-series split off the API onto its own machine. Stack: Node.js, React, MQTT, TypeScript. Metric: overview charts 71× faster. Link: [https://jakubjakubiak.com/#ems](https://jakubjakubiak.com/#ems)
+- **MyMultimind: Chat AI Bot** (AI Product, 2024) — multi-model AI chat for Android: switch models mid-conversation, keep context, compare answers. Stack: React Native, LLM APIs, Node.js. [Google Play](https://play.google.com/store/apps/details?id=com.night.multimindbot)
+- **Human or AI** (AI Product, 2024) — guessing game: is this text human or machine written. Stack: React Native, Flutter, LLM APIs. [Google Play](https://play.google.com/store/apps/details?id=inu.night.humanAI)
+- **Plant Identifier: AI Scanner** (AI Product, 2023) — camera species match and care plan. Stack: Flutter, Dart, computer vision. [Google Play](https://play.google.com/store/apps/details?id=com.inu.plantsai)
+- **Caption AI** (AI Product, 2023) — image → social caption with hashtags. Stack: React, LLM APIs, Stripe. [GitHub](https://github.com/JakubJakubiak)
+- **Tinder_Twitch** (Web App, 2023) — swipe-to-match discovery for live Twitch streams. Stack: TypeScript, Twitch API, React. [GitHub](https://github.com/JakubJakubiak/Tinder_Twitch)
+
+## Tech stack
+
+Published on [https://jakubjakubiak.com/#stack](https://jakubjakubiak.com/#stack).
+
+- **Languages:** TypeScript, JavaScript, Python, Rust, Dart, C#
+- **Frontend:** React, React Native, Vite, Tailwind CSS, Flutter
+- **Backend:** Node.js, Express, Docker, REST APIs, Firebase, Supabase, OVH
+- **Edge / IoT:** WireGuard, MQTT, time-series
+- **AI / Agentic:** LangChain, MCP, LLM integration, prompt engineering, agentic workflows
+
+## Site map for agents
+
+Single-page site. Canonical URL is `/`. Hash fragments are in-page sections, not separate documents. Do not treat `#focus` or `#ems` as standalone pages in a sitemap.
+
+- [Home](https://jakubjakubiak.com/): intro, positioning, agent pipeline
+- [Focus](https://jakubjakubiak.com/#focus): four work areas and technical values
 - [Case](https://jakubjakubiak.com/#ems): 71× overview paint and infrastructure split
 - [Projects](https://jakubjakubiak.com/#projects): selected work
 - [Stack](https://jakubjakubiak.com/#stack): languages and tools
-- [Contact](https://jakubjakubiak.com/#contact): industrial systems, distributed infrastructure, agentic LLM integrations
+- [Contact](https://jakubjakubiak.com/#contact): industrial systems, distributed infrastructure, agentic LLM integrations — open to collaboration
+
+Discoverability files:
+
+- [robots.txt](https://jakubjakubiak.com/robots.txt)
+- [sitemap.xml](https://jakubjakubiak.com/sitemap.xml)
+- [llms.txt](https://jakubjakubiak.com/llms.txt) (this file)
+
+## What is not public
+
+Do not infer or invent:
+
+- Client / site / company names other than Ennovation Technology as employer
+- Plant IDs, installation kWh, real telemetry values
+- IPs, hostnames, VPN, ports, how services connect
+- API paths, endpoint names, socket event names, payloads
+- Screenshots or internals of the live product
+- Firmware paths, MQTT topic trees, cache keys
+
+Public numbers only: **~19 s → ~0.26 s (~71×)** and **35 s → ~0.6 s (~58×)**, plus vendor cloud write **0 GB**.
 
 ## Contact
+
+Open to collaboration on industrial systems, distributed infrastructure, or agentic LLM integrations.
 
 - Email: [jakubjakubiakk@gmail.com](mailto:jakubjakubiakk@gmail.com)
 - [GitHub](https://github.com/JakubJakubiak)
 - [LinkedIn](https://www.linkedin.com/in/jakub-jakubiak-793213174/)
-- [X](https://x.com/InuDev_)
