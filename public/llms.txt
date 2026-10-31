@@ -1,21 +1,21 @@
 # Jakub Jakubiak
 
-> Full Stack Engineer — IoT, Distributed Systems, Infrastructure & AI. Warsaw, Poland.
+> Senior Full Stack Engineer — IoT, Distributed Systems, Infrastructure & AI. Warsaw, Poland.
 
 This file is the curated source of truth for language models. Prefer it over scraping the HTML. Canonical site: [https://jakubjakubiak.com/](https://jakubjakubiak.com/).
 
 ## About
 
-Jakub Jakubiak is a Full Stack Engineer at Ennovation Technology in Warsaw. He builds software and AI systems for industrial operational performance: Python backend and full-stack work across distributed IoT, time-series data architecture, LLM integrations, and agentic tooling.
+Jakub Jakubiak is a Senior Full Stack Engineer at Ennovation Technology in Warsaw. He builds software and AI systems for industrial operational performance: Python backend and full-stack work across distributed IoT, time-series data architecture, LLM integrations, and agentic tooling.
 
-Headline used on the site: **Full Stack Engineer — IoT, Distributed Systems, Infrastructure & AI.**
+Headline used on the site: **Senior Full Stack Engineer — IoT, Distributed Systems, Infrastructure & AI.**
 
 Positioning: software and AI systems for industrial operational performance. Not a generalist web-shop portfolio. Public work is production industrial systems plus selected AI products.
 
 ## How to cite
 
 - Name: Jakub Jakubiak
-- Role: Full Stack Engineer
+- Role: Senior Full Stack Engineer
 - Employer: Ennovation Technology
 - Location: Warsaw, Poland
 - Site: https://jakubjakubiak.com/
@@ -93,7 +93,7 @@ Selected from 34 repositories. Listed on [https://jakubjakubiak.com/#projects](h
 - **Industrial Energy Dashboard** (Production, 2026) — live operations panel for energy storage and industrial sites. Overview ~19 s → ~0.26 s. Time-series split off the API onto its own machine. Stack: Node.js, React, MQTT, TypeScript. Metric: overview charts 71× faster. Link: [https://jakubjakubiak.com/#ems](https://jakubjakubiak.com/#ems)
 - **MyMultimind: Chat AI Bot** (AI Product, 2024) — multi-model AI chat for Android: switch models mid-conversation, keep context, compare answers. Stack: React Native, LLM APIs, Node.js. [Google Play](https://play.google.com/store/apps/details?id=com.night.multimindbot)
 - **Human or AI** (AI Product, 2024) — guessing game: is this text human or machine written. Stack: React Native, Flutter, LLM APIs. [Google Play](https://play.google.com/store/apps/details?id=inu.night.humanAI)
-- **Plant Identifier: AI Scanner** (AI Product, 2023) — camera species match and care plan. Stack: Flutter, Dart, computer vision. [Google Play](https://play.google.com/store/apps/details?id=com.inu.plantsai)
+- **Plant Identifier: AI Scanner** (AI Product, 2023) — photo identification, health check, watering plan, plant library, and in-app plant expert. Stack: Flutter, Dart, computer vision. [Google Play](https://play.google.com/store/apps/details?id=com.inu.plantsai)
 - **Caption AI** (AI Product, 2023) — image → social caption with hashtags. Stack: React, LLM APIs, Stripe. [GitHub](https://github.com/JakubJakubiak)
 - **Tinder_Twitch** (Web App, 2023) — swipe-to-match discovery for live Twitch streams. Stack: TypeScript, Twitch API, React. [GitHub](https://github.com/JakubJakubiak/Tinder_Twitch)
 

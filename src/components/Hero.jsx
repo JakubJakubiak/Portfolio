@@ -19,7 +19,7 @@ export default function Hero() {
         </h1>
 
         <p className="mt-5 font-mono text-sm text-[var(--color-teal)]">
-          Full Stack Engineer — IoT, Distributed Systems, Infrastructure & AI
+          Senior Full Stack Engineer — IoT, Distributed Systems, Infrastructure & AI
         </p>
 
         <p className="mt-6 max-w-xl text-lg text-[var(--color-muted)]">

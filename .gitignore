@@ -11,4 +11,7 @@ __pycache__
 .vite
 
 # CV — local only, never commit or ship with the site
+docs/cv.md
 docs/cv/
+docs/cvorgGit.md
+scripts/export-cv.mjs
