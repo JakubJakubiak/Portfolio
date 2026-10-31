@@ -44,7 +44,7 @@ export const projects = [
     year: '2023',
     stack: ['Flutter', 'Dart', 'Computer Vision'],
     description:
-      'Point your camera at a plant, get a species match and a care plan. Grew out of an earlier watering-reminder app into a full AI plant-care companion.',
+      'Snap a photo — AI identifies the plant, checks its health, and plans watering. Garden, plant library, and an in-app plant expert.',
     metric: 'Live on Google Play',
     link: 'https://play.google.com/store/apps/details?id=com.inu.plantsai',
     accent: 'teal',
