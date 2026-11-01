@@ -25,7 +25,7 @@ export default function Hero() {
         <p className="mt-6 max-w-xl text-lg text-[var(--color-muted)]">
           Software and AI systems for industrial operational performance.
           Python backend and full-stack engineering at Ennovation Technology
-          in Warsaw — distributed IoT, time-series data architecture, LLM
+          in Warsaw distributed IoT, time-series data architecture, LLM
           integrations, and agentic tooling.
         </p>
 

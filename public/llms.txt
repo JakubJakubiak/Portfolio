@@ -91,7 +91,7 @@ Overview rings on a live energy dashboard: **~19 s → ~0.26 s (~71×)**. Empty 
 Selected from 34 repositories. Listed on [https://jakubjakubiak.com/#projects](https://jakubjakubiak.com/#projects).
 
 - **Industrial Energy Dashboard** (Production, 2026) — live operations panel for energy storage and industrial sites. Overview ~19 s → ~0.26 s. Time-series split off the API onto its own machine. Stack: Node.js, React, MQTT, TypeScript. Metric: overview charts 71× faster. Link: [https://jakubjakubiak.com/#ems](https://jakubjakubiak.com/#ems)
-- **MyMultimind: Chat AI Bot** (AI Product, 2024) — multi-model AI chat for Android: switch models mid-conversation, keep context, compare answers. Stack: React Native, LLM APIs, Node.js. [Google Play](https://play.google.com/store/apps/details?id=com.night.multimindbot)
+- **Sakura River** (Product, 2026) — living 3D OBS background: chat drifts under the water, viewers call rain, night and fireworks. One HTML file, no login, no server. Stack: HTML, WebGL, Twitch API. [Product page](https://sakura-river.inudev.org/)
 - **Human or AI** (AI Product, 2024) — guessing game: is this text human or machine written. Stack: React Native, Flutter, LLM APIs. [Google Play](https://play.google.com/store/apps/details?id=inu.night.humanAI)
 - **Plant Identifier: AI Scanner** (AI Product, 2023) — photo identification, health check, watering plan, plant library, and in-app plant expert. Stack: Flutter, Dart, computer vision. [Google Play](https://play.google.com/store/apps/details?id=com.inu.plantsai)
 - **Caption AI** (AI Product, 2023) — image → social caption with hashtags. Stack: React, LLM APIs, Stripe. [GitHub](https://github.com/JakubJakubiak)
